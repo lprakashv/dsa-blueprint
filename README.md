@@ -1,51 +1,83 @@
-# DSA Blueprint
+# DSA Blueprint 🧭
 
-DSA Blueprint is a visual course for coding interviews. It has 30 lessons and 130 steps across arrays and strings, search and sorting, data structures, trees and graphs, matrices and grids, and optimization.
+An interactive course for learning coding interview patterns. Follow an algorithm one step at a time, test your understanding, and build traces with your own inputs.
 
-- **Learn** shows each algorithm one step at a time. Use the timeline, arrow keys, or playback controls. Press Space to play or pause and R to reset. Open **Python implementation** for the code.
-- **Practice** has pattern questions with feedback and a **Hard problems** picker. Each hard problem has a statement, constraints, a worked example, two hints, and links to its visual walkthrough and LeetCode judge.
-- **Playground** builds traces from custom inputs for Two Pointers, Sliding Window, and Binary Search.
-- **Cheatsheets** show when to use each pattern, its complexity, and a Python template.
+[Open the app](https://www.lprakashv.com/dsa-blueprint/) · [Contribute](CONTRIBUTING.md) · [Agent guide](AGENTS.md)
 
-The course outline, central diagram, and step guide take inspiration from [Designed to Scale](https://designed-to-scale.vercel.app/#/). DSA Blueprint has its own lesson content and visual design. Completion and theme settings are stored in the browser.
+![Two Pointers lesson with its visualization, timeline, and guide](docs/images/learn.jpg)
 
-The B-tree example uses a minimum degree of 2. The B+ tree example uses the first key in the right subtree as a separator. The diagram shows the record keys in the leaves. See [OpenDSA’s B-tree and B+ tree chapter](https://opendsa-server.cs.vt.edu/OpenDSA/Books/CS3/html/BTree.html).
+<details>
+<summary>See the app in three views</summary>
 
-The graph lessons show Union-Find, Dijkstra, Bellman–Ford, and Floyd–Warshall. See [Princeton’s Union-Find case study](https://algs4.cs.princeton.edu/15uf/) and [MIT’s shortest-path lectures](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-sma-5503-fall-2005/resources/lecture-videos/).
+![Animated overview of the lesson, playground, and practice views](docs/images/overview.gif)
 
-The hard problems cover variable-size sliding windows, monotonic stacks, word transformations, grid BFS with a removal budget, and interval dynamic programming. They use original examples and link to the corresponding LeetCode problems.
+</details>
 
-## Development
+## Explore the course
 
-Use Node.js 22.12 or later, npm, and Python 3. There are no packages to install.
+- **Learn:** Work through 30 lessons in six modules. Each lesson includes a diagram, a step guide, complexity notes, and a Python implementation.
+- **Practice:** Answer pattern questions or explore five hard problems with examples, hints, and links to LeetCode.
+- **Playground:** Build traces with your own inputs for Two Pointers, Sliding Window, and Binary Search.
+- **Cheatsheets:** Review pattern signals, complexity, and Python templates.
+
+| Practice a hard problem 🎯 | Build a custom trace 🧪 |
+| --- | --- |
+| ![Minimum Window Substring practice problem](docs/images/practice.jpg) | ![Algorithm playground with editable inputs](docs/images/playground.jpg) |
+
+Use the timeline or arrow keys to move between steps. Press Space to play or pause, and R to reset. The app stores completed lessons and the theme in browser local storage. Clearing browser data can remove them.
+
+## Run locally 🚀
+
+You need Node.js 22.12 or later, npm, and Python 3. There are no npm packages to install.
 
 ```sh
+git clone https://github.com/lprakashv/dsa-blueprint.git
+cd dsa-blueprint
 npm run dev
 ```
 
-Open [the development site](http://127.0.0.1:4173/).
+Open [http://127.0.0.1:4173/](http://127.0.0.1:4173/). Stop the server with Ctrl+C.
+
+## Checks
 
 ```sh
 npm run lint
 npm test
 npm run coverage
+npm run build
 ```
 
-Lint checks JavaScript syntax and source whitespace. The tests check routes, lesson and diagram data, custom-input traces, and each Python example. Browser interaction checks run separately from the coverage task.
+Lint checks JavaScript syntax and source whitespace. Tests check lesson data, diagrams, routes, playground traces, and Python examples. Coverage reports the JavaScript modules loaded by the tests; it does not measure browser interactions. See [CONTRIBUTING.md](CONTRIBUTING.md) for the change and review process.
 
-To add a pattern, register the lesson in its chapter in `site/src/lessons.js`. Give it an ID, an interview problem, steps with diagram data, a Python example, and a practice question. A lesson with a `challenge` entry also appears in the Hard problems picker. The course outline, search, practice view, and cheatsheets use the same lesson data.
+## Project map
 
-## Production
+| Path | Purpose |
+| --- | --- |
+| `site/index.html`, `site/src/app.js` | App shell, views, and interactions |
+| `site/src/lessons.js`, `*-lessons.js`, `lesson-content.js` | Course data and lesson helpers |
+| `site/src/diagrams.js`, `trace.js` | Diagram rendering and playground algorithms |
+| `site/src/navigation.js`, `icons.js`, `style.css` | Routes, icons, and visual styles |
+| `test/` | Node tests and Python example checks |
+| `scripts/` | Static build and lint scripts |
+| `.github/workflows/` | Checks and GitHub Pages deployment |
+
+## Deploy
+
+Build and preview the production files:
 
 ```sh
 npm run build
 npm run run
 ```
 
-Open [the build preview](http://127.0.0.1:4174/). Publish the contents of `dist/` to a static host. Use `npm run build` as the build command and `dist` as the output directory. Routes use URL fragments, so the host can serve the same index file from the root or a subdirectory.
+Open [http://127.0.0.1:4174/](http://127.0.0.1:4174/) and stop the server with Ctrl+C. Publish the contents of `dist/` to a static host. Fragment routes work when the site is hosted at the root or in a subdirectory.
 
-### GitHub Pages
+The [GitHub Pages workflow](.github/workflows/deploy-pages.yml) runs checks on pull requests to `main` and builds and deploys on pushes to `main` or manual dispatch. In repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The configured project endpoint is [www.lprakashv.com/dsa-blueprint](https://www.lprakashv.com/dsa-blueprint/).
 
-The GitHub Actions workflow builds and deploys `dist/` when changes reach `main`. It also runs lint and tests for pull requests. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The intended endpoint is <https://www.lprakashv.com/dsa-blueprint>.
+## Credits and license
 
-The GitHub repository is named `dsa-blueprint`, which matches the Pages project path. With `www.lprakashv.com` set as the custom domain for the user site, the project site is available at the intended endpoint.
+The course outline, central diagram, and step guide take inspiration from [Designed to Scale](https://designed-to-scale.vercel.app/#/). DSA Blueprint has its own lesson content and visual design.
+
+The B-tree example uses minimum degree 2. The B+ tree example uses the first key in the right subtree as a separator and shows record keys in the leaves. See [OpenDSA](https://opendsa-server.cs.vt.edu/OpenDSA/Books/CS3/html/BTree.html). The graph lessons include Union-Find and shortest-path algorithms; see [Princeton](https://algs4.cs.princeton.edu/15uf/) and [MIT](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-sma-5503-fall-2005/resources/lecture-videos/).
+
+Released under the [MIT License](LICENSE).

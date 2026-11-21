@@ -1,0 +1,15 @@
+{
+  "name": "dsa-blueprint",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "dev": "python3 -m http.server 4173 --bind 127.0.0.1 --directory site",
+    "run": "python3 -m http.server 4174 --bind 127.0.0.1 --directory dist",
+    "build": "node scripts/build.js",
+    "lint": "node scripts/lint.js",
+    "test": "node --test",
+    "coverage": "node --experimental-test-coverage --test"
+  }
+}

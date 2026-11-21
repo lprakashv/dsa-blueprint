@@ -1,0 +1,36 @@
+const paths = {
+  logo: 'M8 6 2 12l6 6m8-12 6 6-6 6m-2-15-4 18',
+  book: 'M12 7v14m0-14C9 4 5 4 2 5v14c4-1 7 0 10 2 3-2 6-3 10-2V5c-3-1-7-1-10 2Z',
+  target: 'M20.5 9A9 9 0 1 1 15 3.5M16 10a5 5 0 1 1-3-3m-1 5 8-8m-3 0h3v3',
+  flask: 'M9 3h6m-5 0v6l-6 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-9V3M7 15h10',
+  grid: 'M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 0h7v7h-7z',
+  search: 'M21 21l-5-5m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z',
+  moon: 'M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z',
+  sun: 'M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19m12-7a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z',
+  array: 'M6 4H3v16h3m12-16h3v16h-3M8 12h2m4 0h2',
+  layers: 'm12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5',
+  branch: 'M6 6v12m0-5a8 8 0 0 0 8-6m-6-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm0 16a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm10-15a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z',
+  bolt: 'm13 2-9 12h7l-1 8 10-12h-7l1-8Z',
+  chevron: 'm9 6 6 6-6 6',
+  down: 'm6 9 6 6 6-6',
+  left: 'M19 12H5m7-7-7 7 7 7',
+  right: 'M5 12h14m-7-7 7 7-7 7',
+  clock: 'M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+  bars: 'M5 20v-5m5 5V9m5 11V6m5 14V3',
+  play: 'm8 4 12 8-12 8V4Z',
+  pause: 'M9 5v14m6-14v14',
+  reset: 'M3 12a9 9 0 1 1 3 7m-3-1v-5h5',
+  replay: 'M3 10a9 9 0 1 1 2 8m-2-8V5m0 5h5',
+  bulb: 'M9 18h6m-5 3h4m-5-6c0-2-3-3-3-6a6 6 0 0 1 12 0c0 3-3 4-3 6',
+  check: 'm5 12 4 4L19 6',
+  code: 'm8 6-6 6 6 6m8-12 6 6-6 6m-2-14-4 16',
+  menu: 'M3 6h18M3 12h18M3 18h18',
+  close: 'm6 6 12 12M6 18 18 6',
+  external: 'M13 4h7v7m-9 2 9-9m0 10v6H4V4h6',
+  copy: 'M8 8h12v12H8zM4 16V4h12',
+  list: 'M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01',
+}
+
+export function icon(name, size = 18) {
+  return `<svg aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${paths[name]}"/></svg>`
+}

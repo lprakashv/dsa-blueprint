@@ -1,0 +1,23 @@
+README.md
+  s_ea4650013baa1f::t_091d220d76fc29 46-50
+  s_ea4650013baa1f::t_6cd10ee6360872 51
+.github/workflows/deploy-pages.yml
+  s_ea4650013baa1f::t_091d220d76fc29 1-23,25-41
+  s_ea4650013baa1f::t_f0400269f2f38c 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "12ccc370e5cc0897d57e3dbb853dcb6c5cec5bfd",
+  "prompts": {},
+  "sessions": {
+    "s_ea4650013baa1f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ffcf-15cd-7503-a067-0960e5c62be4",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

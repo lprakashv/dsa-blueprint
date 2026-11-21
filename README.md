@@ -43,3 +43,9 @@ npm run run
 ```
 
 Open [the build preview](http://127.0.0.1:4174/). Publish the contents of `dist/` to a static host. Use `npm run build` as the build command and `dist` as the output directory. Routes use URL fragments, so the host can serve the same index file from the root or a subdirectory.
+
+### GitHub Pages
+
+The GitHub Actions workflow builds and deploys `dist/` when changes reach `main`. It also runs lint and tests for pull requests. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The intended endpoint is <https://www.lprakashv.com/dsa-blueprint>.
+
+The GitHub repository is named `dsa-blueprint`, which matches the Pages project path. With `www.lprakashv.com` set as the custom domain for the user site, the project site is available at the intended endpoint.

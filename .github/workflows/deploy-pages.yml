@@ -24,7 +24,7 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          GOOGLE_TAG_ID: GTM-NC9MDRM2
+          GOOGLE_TAG_ID: ${{ vars.GOOGLE_TAG_ID }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

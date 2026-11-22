@@ -81,7 +81,7 @@ The site supports direct Google Analytics 4 (GA4) setup or Google Tag Manager (G
 1. In Google Analytics, create a GA4 property and a **Web** data stream for `https://www.lprakashv.com/dsa-blueprint/`. Copy its measurement ID, which starts with `G-`.
 2. In Google Tag Manager, add a [Google tag](https://support.google.com/tagmanager/answer/14842872) with that `G-` measurement ID. Set its trigger to **Initialization – All Pages**. Turn off its automatic page view and browser history page views. The site sends its own page view events, including fragment route changes.
 3. Add a [GA4 Event tag](https://support.google.com/tagmanager/answer/13034206) with event name `page_view`. Set a **Custom Event** trigger with event name `app_page_view`. Add Data Layer Variables for `page_title`, `page_location`, and `page_path`, then map these as event parameters. Submit and publish the container.
-4. The GitHub Pages build already uses the provided public container ID. No GitHub variable or secret is needed.
+4. In GitHub, open the repository **Settings → Secrets and variables → Actions → Variables**. Add a repository variable named `GOOGLE_TAG_ID` and set it to the GTM container ID. This ID is public and does not need to be a secret.
 5. Run the **Deploy to GitHub Pages** workflow, or push a commit to `main`.
 6. Visit the site and check the GA4 **Realtime** report. Google notes that initial collection can take up to 30 minutes.
 

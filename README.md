@@ -74,6 +74,21 @@ Open [http://127.0.0.1:4174/](http://127.0.0.1:4174/) and stop the server with C
 
 The [GitHub Pages workflow](.github/workflows/deploy-pages.yml) runs checks on pull requests to `main` and builds and deploys on pushes to `main` or manual dispatch. In repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The configured project endpoint is [www.lprakashv.com/dsa-blueprint](https://www.lprakashv.com/dsa-blueprint/).
 
+### Website analytics
+
+The site supports direct Google Analytics 4 (GA4) setup or Google Tag Manager (GTM). Tracking stays off until you add an ID. To enable it with GTM:
+
+1. In Google Analytics, create a GA4 property and a **Web** data stream for `https://www.lprakashv.com/dsa-blueprint/`. Copy its measurement ID, which starts with `G-`.
+2. In Google Tag Manager, add a [Google tag](https://support.google.com/tagmanager/answer/14842872) with that `G-` measurement ID. Set its trigger to **Initialization – All Pages**. Turn off its automatic page view and browser history page views. The site sends its own page view events, including fragment route changes.
+3. Add a [GA4 Event tag](https://support.google.com/tagmanager/answer/13034206) with event name `page_view`. Set a **Custom Event** trigger with event name `app_page_view`. Add Data Layer Variables for `page_title`, `page_location`, and `page_path`, then map these as event parameters. Submit and publish the container.
+4. The GitHub Pages build already uses the provided public container ID. No GitHub variable or secret is needed.
+5. Run the **Deploy to GitHub Pages** workflow, or push a commit to `main`.
+6. Visit the site and check the GA4 **Realtime** report. Google notes that initial collection can take up to 30 minutes.
+
+For direct GA4 setup without Tag Manager, set `GOOGLE_TAG_ID` to the stream measurement ID (`G-...`) instead. Do not use both IDs.
+
+For a local production preview, build with `GOOGLE_TAG_ID=GTM-... npm run build` (or `G-...`), then run `npm run run`. The normal development server does not send analytics. Update your privacy notice and consent setup if applicable to your visitors or region.
+
 ## Credits and license
 
 The course outline, central diagram, and step guide take inspiration from [Designed to Scale](https://designed-to-scale.vercel.app/#/). DSA Blueprint has its own lesson content and visual design.

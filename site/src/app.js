@@ -2,6 +2,7 @@ import { icon } from './icons.js'
 import { diagram, legend, escapeText as text } from './diagrams.js'
 import { lessons, modules } from './lessons.js'
 import { getRoute, lessonLink } from './navigation.js'
+import { trackPageView } from './analytics.js'
 import { labPatterns, parseLabInput } from './trace.js'
 
 const app = document.querySelector('#app')
@@ -464,6 +465,7 @@ function routeChanged() {
   courseVisible = false
   render('content')
   window.scrollTo(0, 0)
+  trackPageView()
 }
 
 app.addEventListener('toggle', event => {
@@ -596,3 +598,4 @@ document.addEventListener('keydown', event => {
 
 window.addEventListener('hashchange', routeChanged)
 render()
+trackPageView()

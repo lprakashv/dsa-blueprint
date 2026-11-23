@@ -214,6 +214,9 @@ function learn() {
     <details class="code-panel panel"><summary>${icon('code', 17)} Python implementation ${icon('down', 15)}</summary>
       <div class="code-wrap"><pre><code>${text(lesson.code)}</code></pre></div>
     </details>
+    <details class="code-panel panel"><summary>${icon('code', 17)} Java implementation ${icon('down', 15)}</summary>
+      <div class="code-wrap"><pre><code>${text(lesson.java)}</code></pre></div>
+    </details>
   </div>`
 }
 
@@ -321,6 +324,7 @@ function reference() {
         <div class="complexity"><div><span>TIME</span><strong>${text(lesson.time)}</strong></div>
           <div><span>SPACE</span><strong>${text(lesson.space)}</strong></div></div>
         <details><summary>Python template</summary><pre><code>${text(lesson.code)}</code></pre></details>
+        <details><summary>Java template</summary><pre><code>${text(lesson.java)}</code></pre></details>
       </article>`).join('')}</div></section>`).join('')}
   </div>`
 }

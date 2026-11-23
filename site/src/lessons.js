@@ -1,4 +1,5 @@
 import { binarySearch, slidingWindow, twoPointers } from './trace.js'
+import { javaSolutions } from './java-solutions.js'
 import { step, code, quiz, row } from './lesson-content.js'
 import { indexTrees } from './index-tree-lessons.js'
 import { connectivity } from './graph-lessons.js'
@@ -433,3 +434,4 @@ export const modules = [
 ]
 
 export const lessons = modules.flatMap(module => module.lessons)
+lessons.forEach(lesson => { lesson.java = javaSolutions[lesson.id] })

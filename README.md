@@ -6,18 +6,20 @@ An interactive course for learning coding interview patterns. Follow an algorith
 
 ## Explore the course
 
-- **Learn:** Work through 42 lessons in seven modules. Each lesson includes a diagram, a step guide, complexity notes, and a Python implementation.
+- **Learn:** Work through 42 lessons in seven modules. Each lesson includes a diagram, a step guide, complexity notes, and Python and Java implementations.
 - **Practice:** Answer pattern questions or open **Misc Problems** for ten hard problems with examples, hints, and detailed visual solutions.
 - **Playground:** Build traces with your own inputs for Two Pointers, Sliding Window, and Binary Search.
-- **Cheatsheets:** Review pattern signals, complexity, and Python templates.
+- **Cheatsheets:** Review pattern signals, complexity, and Python and Java templates.
 
 On desktop, the course outline sits beside the lesson text and whiteboard. Drag either divider to change the pane width. With a divider focused, use the arrow keys to resize it. On narrow screens, open the outline from the header. The whiteboard appears above the lesson text.
 
 Use Back, the step menu, Next, or the arrow keys to move between steps. Press Space to play or pause, R to reset, and / to search. The app stores completed lessons, the theme, and pane widths in browser local storage.
 
+The Java examples use fixed-width numeric types. Assume that inputs and intermediate results fit those types. String examples use Java UTF-16 characters; use code points when an input can include supplementary characters.
+
 ## Run locally 🚀
 
-You need Node.js 22.12 or later, npm, and Python 3. There are no npm packages to install.
+You need Node.js 22.12 or later, npm, Python 3, and JDK 17 or later. There are no npm packages to install.
 
 ```sh
 git clone https://github.com/lprakashv/dsa-blueprint.git
@@ -36,7 +38,7 @@ npm run coverage
 npm run build
 ```
 
-Lint checks JavaScript syntax and source whitespace. Tests check lesson data, diagrams, routes, playground traces, and Python examples. Coverage reports the JavaScript modules loaded by the tests; it does not measure browser interactions. See [CONTRIBUTING.md](CONTRIBUTING.md) for the change and review process.
+Lint checks JavaScript syntax and source whitespace. Tests check lesson data, diagrams, routes, playground traces, and Python and Java examples. Coverage reports the JavaScript modules loaded by the tests; it does not measure browser interactions. See [CONTRIBUTING.md](CONTRIBUTING.md) for the change and review process.
 
 ## Project map
 

@@ -1,6 +1,6 @@
 # Course Board learner migration
 
-The stock learner now builds DSA Blueprint. The project pins Course Board commit `046dd2c`, the commit that merged Studio and the bundle import command. [Upstream commit](https://github.com/lprakashv/course-board/commit/046dd2ca02dfdea90ac7a94d817898096b712c6c)
+The stock learner now builds DSA Blueprint. The project pins Course Board commit `eec136f`, which adds pane resizing, a theme selector, and whiteboard state display. [Upstream commit](https://github.com/lprakashv/course-board/commit/eec136fdf7177e3eeaf1f2ada8e15c32df3c9772)
 
 The migration used `course-board ingest` to write the manifest, Markdown lessons, snippets, and public assets. The 42 original lessons keep their IDs and the order of their numbered walkthrough steps. When you edit the files in Studio and save, the Course Board development server reads the same files on reload. The production build uses the same compiler and renders the same model in the stock learner.
 
@@ -16,7 +16,7 @@ The migration used `course-board ingest` to write the manifest, Markdown lessons
 ## Learner differences
 
 - The stock learner uses `#/<lesson-id>/<step>` and its own browser progress storage. Earlier fragment routes and saved DSA progress do not carry over.
-- The stock learner provides manual navigation with Previous, Next, and arrow keys. It uses the browser's color preference for light or dark mode. The old shell's playback, pane resizing, and theme toggle are retired.
+- The stock learner provides manual navigation with Previous, Next, and arrow keys. It provides pane resizing and a theme selector. The old shell's playback is retired.
 - The previous Playground's input form is retired. The Two Pointers, Sliding Window, and Binary Search notes link to the code examples for checking a hand trace.
 - The learner has no declarative Google Analytics or Google Tag Manager setting. The Pages build no longer passes `GOOGLE_TAG_ID`.
 - Studio can replace a migrated HTML diagram or update its metadata. To change the markup of an existing HTML asset, edit the file in `public/diagrams/`. The learner displays it in a sandboxed frame. For new editable drawings, use Studio to create an Excalidraw board.

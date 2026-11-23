@@ -13,7 +13,7 @@ Learn coding interview patterns with step-by-step whiteboards, Python and Java e
 - In **Practice**, review the choices and open **Check the answer** to see the explanation and related exercises. The ten **Misc Problems** lessons include problem statements, constraints, hints, and links to LeetCode.
 - Open **Reference → Pattern cheatsheets** to compare signals and costs and jump to code examples.
 
-Use Previous, Next, or the left and right arrow keys to move between steps. Select **Mark complete** on the last step to save progress in the browser. The theme follows the device's color scheme.
+Use Previous, Next, or the left and right arrow keys to move between steps. Select **Mark complete** on the last step to save progress in the browser. Use **Theme** to choose a color scheme. On wide screens, drag the pane dividers or use the arrow keys to resize them.
 
 The Java examples use fixed-width numeric types. Assume that inputs and intermediate results fit those types. The string examples use UTF-16 units. Use code points for strings that contain supplementary Unicode characters.
 
@@ -30,7 +30,7 @@ npm run dev
 
 Open [the learner preview](http://127.0.0.1:4173/). Save changes to the course files and reload the page. Stop the server with Ctrl+C.
 
-Course Board is pinned to commit `046dd2c`, which contains Studio and the bundle import command. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/046dd2ca02dfdea90ac7a94d817898096b712c6c)
+Course Board is pinned to commit `eec136f`. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/eec136fdf7177e3eeaf1f2ada8e15c32df3c9772)
 
 ## Author and import
 
@@ -60,7 +60,7 @@ The GitHub Pages workflow checks pull requests to `main` and publishes the site 
 
 ## Learner migration
 
-Course Board uses links such as `#/two-pointers/2` and `#/two-pointers/practice`. Earlier `#/learn/…`, `#/practice/…`, and other DSA routes need new links. Completion uses the Course Board storage format and starts fresh. The three lessons with custom input previously available include instructions to trace an input and verify it with the examples. The stock learner has manual step controls and uses the device theme. [Migration details](docs/course-board-review.md)
+Course Board uses links such as `#/two-pointers/2` and `#/two-pointers/practice`. Earlier `#/learn/…`, `#/practice/…`, and other DSA routes need new links. Completion uses the Course Board storage format and starts fresh. The three lessons with custom input previously available include instructions to trace an input and verify it with the examples. The stock learner has manual step controls and a theme selector. [Migration details](docs/course-board-review.md)
 
 ## Credits and license
 

@@ -1,10 +1,16 @@
 import { icon } from './icons.js'
-import { diagram, legend, escapeText as text } from './diagrams.js'
+import { legend, escapeText as text } from './diagrams.js'
+import { renderFrame } from './course-board.js'
 import { lessons, miscProblems, modules } from './lessons.js'
 import { getRoute, lessonLink } from './navigation.js'
 import { trackPageView } from './analytics.js'
 import { setupPanes } from './panes.js'
 import { labPatterns, parseLabInput } from './trace.js'
+import { createCourseShell } from './vendor/shell.js'
+import { assetUrl } from './vendor/course-board.js'
+import course from './generated/course.js'
+
+const extension = course.extension ? await import(new URL(`../${assetUrl(course.extension)}`, import.meta.url)) : {}
 
 const app = document.querySelector('#app')
 const pages = [
@@ -12,20 +18,13 @@ const pages = [
   ['lab', 'Playground', 'flask'], ['reference', 'Cheatsheets', 'grid'],
 ]
 const courseKey = 'pattern-studio-v1'
+const shell = createCourseShell({ storageKey: courseKey, readRoute: hash => getRoute(hash, lessons) })
 
-function readProgress() {
-  try {
-    return JSON.parse(localStorage.getItem(courseKey)) ?? {}
-  } catch {
-    return {}
-  }
-}
-
-const saved = readProgress()
+const saved = shell.readState({})
 const paneWidths = { ...saved.paneWidths }
 const completed = new Set(Array.isArray(saved.completed) ? saved.completed.filter(id => lessons.some(lesson => lesson.id === id)) : [])
 let dark = saved.dark === true
-let route = getRoute(location.hash, lessons)
+let route = shell.route()
 const opened = new Set([modules.find(module => module.lessons.includes(route.lesson)).name])
 let courseVisible = false
 let practiceId = route.page === 'practice' ? route.lesson.id : lessons[0].id
@@ -40,11 +39,7 @@ let timer = null
 let speed = 1
 
 function saveProgress() {
-  try {
-    localStorage.setItem(courseKey, JSON.stringify({ completed: [...completed], dark, paneWidths }))
-  } catch {
-    // The course still works if the browser disables local storage.
-  }
+  shell.writeState({ completed: [...completed], dark, paneWidths })
 }
 
 const syncPanes = setupPanes(app, paneWidths, saveProgress)
@@ -91,7 +86,7 @@ function sidebar() {
       `<details data-module="${module.name}"${opened.has(module.name) ? ' open' : ''}>
         <summary><span class="module-name">${module.name}</span></summary>
         <div class="module-links">${module.lessons.map(lesson => `<a href="${lessonLink(lesson)}"${current(route.page === 'learn' && lesson === route.lesson)}>
-          <span class="lesson-dot${completed.has(lesson.id) ? ' is-done' : ''}">${completed.has(lesson.id) ? icon('check', 10) : ''}</span>${lesson.title}</a>`).join('')}</div>
+          <span class="lesson-dot${completed.has(lesson.id) ? ' is-done' : ''}">${completed.has(lesson.id) ? icon('check', 10) : ''}</span>${text(lesson.title)}</a>`).join('')}</div>
       </details>`).join('')}</nav>
     <div class="progress-card"><div class="progress-head"><strong>Course progress</strong><span>${completed.size}/${lessons.length}</span></div>
       <progress value="${completed.size}" max="${lessons.length}" aria-label="Course progress"></progress>
@@ -166,7 +161,7 @@ function guide() {
   const frame = currentFrame()
   const first = getIndex() === 0
   return `<div class="guide-card panel">
-    <p>${text(frame.body)}</p>
+    ${frame.html ?? `<p>${text(frame.body)}</p>`}
     ${route.page === 'learn' ? `<div class="insight">
       <h3>${first ? 'Pattern signal' : 'Invariant'}</h3>
       <p>${text(first ? route.lesson.signal : route.lesson.invariant)}</p>
@@ -192,14 +187,14 @@ function learn() {
   const position = module.lessons.indexOf(lesson) + 1
   return `<div class="study">
     <header class="lesson-title-row">
-      <div class="lesson-title"><h1>${lesson.title}</h1>
+      <div class="lesson-title"><h1>${text(lesson.title)}</h1>
         ${completed.has(lesson.id) ? '<span class="pill finished">Completed</span>' : ''}</div>
       <div id="step-controls"></div>
     </header>
     <div class="lesson-head">
       <p class="lesson-meta"><span>${module.name} · Lesson ${position} of ${module.lessons.length}</span>
         <span>${lesson.difficulty} · ${lesson.minutes} min</span></p>
-      <p class="lede">${lesson.summary}</p>
+      <p class="lede">${text(lesson.summary)}</p>
     </div>
     <h2 id="step-title" class="stage-heading"></h2>
     <div class="lesson-workspace">
@@ -272,7 +267,7 @@ function practice() {
       <section class="panel exercise-card" aria-label="${challenge ? 'Problem statement' : 'Pattern question'}">
         <div class="field-label"><label for="practice-select">Pattern</label><select id="practice-select" data-field="practice">
           ${modules.map(module => `<optgroup label="${module.name}">${module.lessons.map(item =>
-            `<option value="${item.id}"${selected(item.id === practiceId)}>${item.title}</option>`).join('')}</optgroup>`).join('')}
+            `<option value="${item.id}"${selected(item.id === practiceId)}>${text(item.title)}</option>`).join('')}</optgroup>`).join('')}
         </select></div>
         ${challenge ? `${challengePrompt(lesson)}
           <details class="challenge-reasoning"${answered ? ' open' : ''}><summary>Check your reasoning</summary>${quizBody}</details>`
@@ -319,7 +314,7 @@ function reference() {
     ${pageHeading('Pattern cheatsheets', 'Review when to use each pattern and what to say in an interview.')}
     ${modules.map(module => `<section class="reference-group"><h2><span class="module-icon ${module.color}">${icon(module.icon, 16)}</span>${module.name}</h2>
       <div class="reference-grid">${module.lessons.map(lesson => `<article class="panel reference-card">
-        <h3><a href="${lessonLink(lesson)}">${lesson.title} ${icon('right', 15)}</a></h3>
+        <h3><a href="${lessonLink(lesson)}">${text(lesson.title)} ${icon('right', 15)}</a></h3>
         <p>${text(lesson.signal)}</p>
         <div class="complexity"><div><span>TIME</span><strong>${text(lesson.time)}</strong></div>
           <div><span>SPACE</span><strong>${text(lesson.space)}</strong></div></div>
@@ -344,7 +339,7 @@ function searchResults(query = '') {
     return terms.every(term => subject.includes(term))
   })
   document.querySelector('#search-results').innerHTML = matches.length
-    ? `<ul>${matches.map(lesson => `<li><a href="${lessonLink(lesson)}" data-action="search-result"><div><strong>${lesson.title}</strong>
+    ? `<ul>${matches.map(lesson => `<li><a href="${lessonLink(lesson)}" data-action="search-result"><div><strong>${text(lesson.title)}</strong>
       <span>${lesson.problem}</span></div>${icon('right', 16)}</a></li>`).join('')}</ul>`
     : '<p class="no-results">No patterns match your search.</p>'
 }
@@ -353,11 +348,29 @@ function paintFrame(animate = false) {
   const frame = currentFrame()
   const art = document.querySelector('#stage-art')
   const before = Object.fromEntries([...art.querySelectorAll('[data-motion]')].map(item => [item.dataset.motion, item.getBoundingClientRect().left]))
-  document.querySelector('#metrics').innerHTML = metrics(frame)
-  art.innerHTML = diagram(frame.scene)
+  document.querySelector('#metrics').innerHTML = frame.diagram ? '' : metrics(frame)
+  try {
+    art.innerHTML = renderFrame(frame, extension.diagrams)
+  } catch (error) {
+    art.innerHTML = `<p role="alert">${text(error.message)}</p>`
+  }
   const note = art.querySelector('.scene-note')
-  document.querySelector('#board-note').replaceChildren(...(note ? [note] : []))
-  document.querySelector('#legend').innerHTML = legend(frame.scene).map(([color, label]) =>
+  const boardNote = document.querySelector('#board-note')
+  boardNote.replaceChildren(...(note ? [note] : []))
+  if (frame.diagram?.caption) {
+    const caption = document.createElement('p')
+    caption.className = 'scene-note'
+    caption.textContent = frame.diagram.caption
+    boardNote.append(caption)
+  }
+  if (frame.diagram?.source) {
+    const download = document.createElement('a')
+    download.href = assetUrl(frame.diagram.source)
+    download.download = ''
+    download.textContent = 'Download scene'
+    boardNote.append(download)
+  }
+  document.querySelector('#legend').innerHTML = (frame.diagram ? [] : legend(frame.scene)).map(([color, label]) =>
     `<span><i class="legend-dot ${color}"></i>${label}</span>`).join('')
   const menu = document.querySelector('.step-menu')
   const scroll = menu?.querySelector('.step-list').scrollTop ?? 0
@@ -365,8 +378,10 @@ function paintFrame(animate = false) {
   document.querySelector('.step-list').scrollTop = scroll
   document.querySelector('#step-title').textContent = frame.title
   if (animate) {
+    const prose = document.createElement('div')
+    if (frame.html) prose.innerHTML = frame.html
     document.querySelector('#announcement').textContent =
-      `Step ${getIndex() + 1} of ${getFrames().length}. ${frame.title}. ${frame.body}`
+      `Step ${getIndex() + 1} of ${getFrames().length}. ${frame.title}. ${frame.html ? prose.textContent.trim() : frame.body}`
   }
   document.querySelector('#guide').innerHTML = guide()
   const play = document.querySelector('#play')
@@ -464,7 +479,7 @@ function openSearch() {
 function routeChanged() {
   stop()
   const previous = route
-  route = getRoute(location.hash, lessons)
+  route = shell.route()
   const module = modules.find(item => item.lessons.includes(route.lesson))
   if (!module.lessons.includes(previous.lesson)) opened.clear()
   opened.add(module.name)
@@ -622,6 +637,7 @@ document.addEventListener('keydown', event => {
   event.preventDefault()
 })
 
-window.addEventListener('hashchange', routeChanged)
-render()
-trackPageView()
+shell.start({
+  render: () => { render(); trackPageView() },
+  onNavigate: routeChanged,
+})

@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { binarySearch, labPatterns, parseLabInput, slidingWindow, twoPointers } from '../site/src/trace.js'
+import { diagram } from '../site/src/diagrams.js'
+import { renderFrame } from '../site/src/course-board.js'
+
+test('playground frames retain their diagram markup through Course Board', () => {
+  for (const trace of [twoPointers([1, 2, 4, 6], 7), slidingWindow([2, 1, 5], 2), binarySearch([1, 3, 5], 3)]) {
+    for (const frame of trace.steps) assert.equal(renderFrame(frame), diagram(frame.scene))
+  }
+})
 
 test('two pointers return distinct indices, including with equal values', () => {
   const values = [-4, -1, 0, 4, 4, 7]

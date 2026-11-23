@@ -2,8 +2,39 @@ import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import test from 'node:test'
 import { diagram, escapeText, legend } from '../site/src/diagrams.js'
+import { renderFrame } from '../site/src/course-board.js'
 import { lessons, miscProblems } from '../site/src/lessons.js'
 import { getRoute, lessonLink } from '../site/src/navigation.js'
+import { compileCourse, parseLesson } from '@lprakashv/course-board'
+
+test('Course Board content drives lesson order and steps', async () => {
+  const course = await compileCourse('.')
+  const authored = course.chapters.flatMap(chapter => chapter.lessons)
+  assert.deepEqual(authored.map(lesson => lesson.id), lessons.map(lesson => lesson.id))
+  for (const [index, lesson] of authored.entries()) {
+    assert.equal(lessons[index].title, lesson.title)
+    assert.equal(lessons[index].summary, lesson.summary)
+    assert.deepEqual(lessons[index].steps.map(step => step.html), lesson.steps.map(step => step.html))
+  }
+  const sample = parseLesson('---\ntitle: Example\n---\n\n## Step\n\nUse **bold** text.\n', 'example')
+  assert.match(sample.steps[0].html, /<strong>bold<\/strong>/)
+})
+
+test('authored diagrams use Course Board renderers and escape text and paths', () => {
+  const frame = { title: 'Example', scene: { type: 'array', values: [1] } }
+  assert.match(renderFrame({ ...frame, diagram: { type: 'ascii', alt: 'A "diagram"', text: '<x>' } }),
+    /aria-label="A &quot;diagram&quot;".*&lt;x&gt;/)
+  for (const type of ['image', 'svg', 'excalidraw', 'html']) {
+    const src = type === 'html' ? 'boards/demo.html' : type === 'image' ? 'boards/demo.png' : 'boards/demo.svg'
+    const result = renderFrame({ ...frame, diagram: { type, alt: 'Example', src } })
+    assert.match(result, new RegExp(`src="\\./media/${src.replace('.', '\\.')}`))
+    if (type === 'html') assert.match(result, /sandbox/)
+  }
+  const custom = { type: 'custom', name: 'demo', alt: 'Example', data: { value: 3 } }
+  assert.equal(renderFrame({ ...frame, diagram: custom }, { demo: ({ data }) => `<p>${data.value}</p>` }), '<p>3</p>')
+  assert.throws(() => renderFrame({ ...frame, diagram: custom }), /Missing diagram renderer/)
+  assert.throws(() => renderFrame({ ...frame, diagram: { type: 'svg', alt: 'Example', src: '../bad.svg' } }), /Invalid asset path/)
+})
 
 test('every lesson has renderable frames, a valid link and a practice answer', () => {
   assert.equal(new Set(lessons.map(lesson => lesson.id)).size, lessons.length)
@@ -27,6 +58,7 @@ test('every lesson has renderable frames, a valid link and a practice answer', (
     for (const [index, frame] of lesson.steps.entries()) {
       assert.ok(frame.label && frame.title && frame.body)
       assert.ok(diagram(frame.scene).startsWith('<div'))
+      assert.equal(renderFrame(frame), diagram(frame.scene))
       assert.ok(legend(frame.scene).length >= 2)
       assert.deepEqual(getRoute(lessonLink(lesson, index), lessons), { page: 'learn', lesson, step: index })
     }

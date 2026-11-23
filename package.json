@@ -3,13 +3,24 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22.12" },
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "dev": "python3 -m http.server 4173 --bind 127.0.0.1 --directory site",
     "run": "python3 -m http.server 4174 --bind 127.0.0.1 --directory dist",
     "build": "node scripts/build.js",
     "lint": "node scripts/lint.js",
     "test": "node --test",
-    "coverage": "node --experimental-test-coverage --test"
+    "coverage": "node --experimental-test-coverage --test",
+    "setup:course-board": "course-board vendor site/src/vendor/course-board.js && course-board vendor-shell site/src/vendor && node scripts/compile-course.js",
+    "predev": "npm run setup:course-board",
+    "prelint": "npm run setup:course-board",
+    "pretest": "npm run setup:course-board",
+    "precoverage": "npm run setup:course-board",
+    "prebuild": "npm run setup:course-board"
+  },
+  "devDependencies": {
+    "@lprakashv/course-board": "https://github.com/lprakashv/course-board/releases/download/v0.1.2/lprakashv-course-board-0.1.2.tgz"
   }
 }

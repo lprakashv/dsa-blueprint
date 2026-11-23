@@ -7,6 +7,7 @@ import { matrices } from './grid-lessons.js'
 import { minimumWindow, largestRectangle, wordLadder, obstaclePath, burstBalloons } from './challenge-lessons.js'
 import { prefixBalance, linkedGap, treePostorder, extremesDP, knapsack, answerSearch, arrayIndex } from './interview-pattern-lessons.js'
 import { miscLessons } from './misc-lessons.js'
+import course from './generated/course.js'
 const lanes = (rows, caption) => ({ type: 'lanes', rows, caption })
 const intervals = (groups, end, caption) => ({ type: 'intervals', groups, end, caption })
 
@@ -432,6 +433,39 @@ export const modules = [
   { name: 'Optimization', icon: 'bolt', color: 'pink', lessons: [...decisionsLessons, knapsack, extremesDP] },
   miscProblems,
 ]
+
+const moduleByName = new Map(modules.map(module => [module.name, module]))
+const lessonById = new Map(modules.flatMap(module => module.lessons).map(lesson => [lesson.id, lesson]))
+if (course.chapters.length !== modules.length || new Set(course.chapters.map(chapter => chapter.title)).size !== modules.length ||
+    course.chapters.some(chapter => !moduleByName.has(chapter.title)) ||
+    course.chapters.flatMap(chapter => chapter.lessons).length !== lessonById.size) {
+  throw new Error('Course Board chapters must match the DSA lesson data')
+}
+modules.splice(0, modules.length, ...course.chapters.map(chapter => {
+  const module = moduleByName.get(chapter.title)
+  const moduleIds = new Set(module.lessons.map(lesson => lesson.id))
+  if (chapter.lessons.length !== moduleIds.size || chapter.lessons.some(lesson => !moduleIds.has(lesson.id))) {
+    throw new Error(`${chapter.title}: Course Board lessons must match the DSA module`)
+  }
+  const authored = chapter.lessons.map(content => {
+    const lesson = lessonById.get(content.id)
+    if (!lesson || content.steps.length !== lesson.steps.length) {
+      throw new Error(`${content.id}: Course Board steps must match the DSA scene data`)
+    }
+    lesson.title = content.title
+    lesson.summary = content.summary ?? ''
+    lesson.steps.forEach((frame, index) => {
+      const step = content.steps[index]
+      frame.title = step.title
+      frame.body = step.text.replace(/\\([\\`*_{}\[\]<>#+.!|~-])/g, '$1')
+      frame.html = step.html
+      frame.diagram = step.diagram
+    })
+    return lesson
+  })
+  module.lessons.splice(0, module.lessons.length, ...authored)
+  return module
+}))
 
 export const lessons = modules.flatMap(module => module.lessons)
 lessons.forEach(lesson => { lesson.java = javaSolutions[lesson.id] })

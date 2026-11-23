@@ -233,6 +233,9 @@ h1 { margin: .25rem 0; font-size: clamp(1.3rem, 3vw, 2.5rem); line-height: 1.1; 
 }
 .stage-art { display: grid; place-items: center; min-width: 0; padding: .875rem clamp(.375rem, 2vw, 1.75rem); }
 .stage-art > * { min-width: 0; }
+.stage-art .cb-ascii { max-width: 100%; overflow: auto; white-space: pre; }
+.stage-art .cb-image { display: block; max-width: 100%; height: auto; }
+.stage-art .cb-html { width: 100%; min-height: 18rem; border: 0; }
 .legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .75rem; color: var(--muted); font-size: .8125rem; }
 .legend span { display: inline-flex; align-items: center; gap: .375rem; }
 .legend-dot { width: .7rem; height: .55rem; border: 1px solid var(--muted); border-radius: 2px; }

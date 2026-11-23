@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "id": "dsa-blueprint",
+  "title": "DSA Blueprint",
+  "chapters": [
+    {
+      "title": "Arrays & Strings",
+      "lessons": [
+        "two-pointers",
+        "sliding-window",
+        "prefix-sum",
+        "hash-map",
+        "prefix-sum-hash-map"
+      ]
+    },
+    {
+      "title": "Search & Sorting",
+      "lessons": [
+        "binary-search",
+        "intervals",
+        "binary-search-on-answer"
+      ]
+    },
+    {
+      "title": "Data Structures",
+      "lessons": [
+        "stack",
+        "linked-list",
+        "heap",
+        "linked-list-gap",
+        "array-index-map",
+        "b-tree",
+        "b-plus-tree"
+      ]
+    },
+    {
+      "title": "Trees & Graphs",
+      "lessons": [
+        "bfs",
+        "dfs",
+        "topological-sort",
+        "tree-postorder",
+        "union-find",
+        "dijkstra",
+        "bellman-ford",
+        "floyd-warshall"
+      ]
+    },
+    {
+      "title": "Matrices & Grids",
+      "lessons": [
+        "grid-dfs",
+        "grid-bfs",
+        "spiral-matrix",
+        "matrix-prefix-sum"
+      ]
+    },
+    {
+      "title": "Optimization",
+      "lessons": [
+        "backtracking",
+        "dynamic-programming",
+        "greedy",
+        "knapsack-01",
+        "dp-min-max"
+      ]
+    },
+    {
+      "title": "Misc Problems",
+      "lessons": [
+        "minimum-window-substring",
+        "largest-rectangle-in-histogram",
+        "word-ladder",
+        "grid-obstacle-elimination",
+        "burst-balloons",
+        "median-of-two-sorted-arrays",
+        "binary-tree-maximum-path-sum",
+        "reverse-nodes-in-k-group",
+        "word-search-ii",
+        "split-array-largest-sum"
+      ]
+    }
+  ]
+}

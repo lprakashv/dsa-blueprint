@@ -9,10 +9,12 @@ test('production output uses the stock learner and ships the referenced data', a
   const root = await mkdtemp(join(tmpdir(), 'dsa-blueprint-build-'))
   try {
     await Promise.all(['content', 'public'].map(dir => cp(dir, join(root, dir), { recursive: true })))
-    const site = await buildSite(root)
+    const site = await buildSite(root, { analytics: { GOOGLE_TAG_ID: 'G-ABC123' } })
     const html = await readFile(join(site, 'index.html'), 'utf8')
     assert.match(html, /src="\.\/_board\/app\.js"/)
     assert.doesNotMatch(html, /data-course-board-adapter/)
+    assert.match(html, /gtag\/js\?id=G-ABC123/)
+    assert.match(html, /addEventListener\('hashchange'/)
     const course = JSON.parse(await readFile(join(site, 'course.json'), 'utf8'))
     assert.equal(course.id, 'dsa-blueprint')
     const { steps } = course.chapters[0].lessons[0]

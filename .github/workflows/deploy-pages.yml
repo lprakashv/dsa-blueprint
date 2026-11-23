@@ -27,6 +27,8 @@ jobs:
       - run: npm test
       - run: npm run coverage
       - name: Build site
+        env:
+          GOOGLE_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
         run: npm run build
       # Capture the production output so the screenshot matches the deploy artifact.
       - name: Capture README screenshot

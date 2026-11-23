@@ -30,7 +30,7 @@ npm run dev
 
 Open [the learner preview](http://127.0.0.1:4173/). Save changes to the course files and reload the page. Stop the server with Ctrl+C.
 
-Course Board is pinned to commit `eec136f`. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/eec136fdf7177e3eeaf1f2ada8e15c32df3c9772)
+Course Board is pinned to commit `9940134`. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/9940134f43064955555b3fb6012f013a50cbfc9d)
 
 ## Author and import
 
@@ -57,6 +57,8 @@ npm run run
 Open [the production preview](http://127.0.0.1:4174/). Stop the server with Ctrl+C. Upload `dist/` to a static host. Relative asset paths support subdirectory hosting.
 
 The GitHub Pages workflow checks pull requests to `main` and publishes the site and screenshot on pushes to `main` or manual runs. Set **Pages → Build and deployment → Source** to **GitHub Actions**. [Deployment workflow](.github/workflows/deploy-pages.yml)
+
+The build reads the `GOOGLE_TAG_ID` GitHub Actions repository secret to enable Google Analytics. Use a GA4 measurement ID. If the secret is empty, analytics is disabled. The ID is visible in the published site. Course Board records the initial page view and fragment navigation; disable overlapping history-change measurement in Google Analytics to avoid duplicate views. [Analytics guide](https://github.com/lprakashv/course-board/blob/9940134f43064955555b3fb6012f013a50cbfc9d/docs/publishing.md#add-analytics-to-the-default-site)
 
 ## Learner migration
 

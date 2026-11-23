@@ -65,6 +65,8 @@ Open [http://127.0.0.1:4174/](http://127.0.0.1:4174/) and stop the server with C
 
 The [GitHub Pages workflow](.github/workflows/deploy-pages.yml) runs checks on pull requests to `main` and builds and deploys on pushes to `main` or manual dispatch. In repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The configured project endpoint is [www.lprakashv.com/dsa-blueprint](https://www.lprakashv.com/dsa-blueprint/).
 
+If the site shows the repository README, check the Pages source. **Deploy from a branch** can publish the repository root and replace the app. Set the source to **GitHub Actions**, then run **Deploy to GitHub Pages** from the Actions tab and check the site after the run succeeds.
+
 ### Website analytics
 
 The site supports direct Google Analytics 4 (GA4) setup or Google Tag Manager (GTM). Tracking stays off until you add an ID. To enable it with GTM:

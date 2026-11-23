@@ -1,0 +1,19 @@
+public/theme.css
+  s_c9c70340a35a73::t_8eca967c0462c1 1-2,20-35,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "914839f635c6edd3c25dcdde87efe3c17c229aab",
+  "prompts": {},
+  "sessions": {
+    "s_c9c70340a35a73": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20960-f6a9-7a81-b23a-fc47b23b9f89",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

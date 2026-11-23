@@ -4,11 +4,11 @@ Learn coding interview patterns with step-by-step whiteboards, Python and Java e
 
 [Open the course](https://www.lprakashv.com/dsa-blueprint/) · [Contribute](CONTRIBUTING.md) · [Agent guide](AGENTS.md)
 
-![DSA Blueprint lesson with a course outline and algorithm whiteboard](https://www.lprakashv.com/dsa-blueprint/screenshot.png)
+![DSA Blueprint course index with chapters and lesson links](https://www.lprakashv.com/dsa-blueprint/screenshot.png)
 
 ## Explore the course
 
-- Study 42 lessons across seven topic chapters. Use the course outline to search for a lesson or step.
+- Use the home page to browse 42 lessons across seven topic chapters. Use the course outline to search for a lesson or step.
 - Open **Pattern notes** for the invariant, complexity, and common error. Open **Python example** or **Java example** for the implementation.
 - In **Practice**, review the choices and open **Check the answer** to see the explanation and related exercises. The ten **Misc Problems** lessons include problem statements, constraints, hints, and links to LeetCode.
 - Open **Reference → Pattern cheatsheets** to compare signals and costs and jump to code examples.
@@ -30,7 +30,7 @@ npm run dev
 
 Open [the learner preview](http://127.0.0.1:4173/). Save changes to the course files and reload the page. Stop the server with Ctrl+C.
 
-Course Board is pinned to commit `d3dc5f0`. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/d3dc5f02b00f5aeeb35ea256c73147561593a3b4)
+Course Board is pinned to the `v0.3.0` tag commit `9e76c08`. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/9e76c08de42190571454631d64c8f90572bcc89f)
 
 ## Author and import
 
@@ -58,7 +58,7 @@ Open [the production preview](http://127.0.0.1:4174/). Stop the server with Ctrl
 
 The GitHub Pages workflow checks pull requests to `main` and publishes the site and screenshot on pushes to `main` or manual runs. Set **Pages → Build and deployment → Source** to **GitHub Actions**. [Deployment workflow](.github/workflows/deploy-pages.yml)
 
-The build reads the `GOOGLE_TAG_ID` GitHub Actions repository secret to enable Google Analytics. Use a GA4 measurement ID. If the secret is empty, analytics is disabled. The ID is visible in the published site. Course Board records the initial page view and fragment navigation; disable overlapping history-change measurement in Google Analytics to avoid duplicate views. [Analytics guide](https://github.com/lprakashv/course-board/blob/d3dc5f02b00f5aeeb35ea256c73147561593a3b4/docs/publishing.md#add-analytics-to-the-default-site)
+The build reads the `GOOGLE_TAG_ID` GitHub Actions repository secret to enable Google Analytics. Use a GA4 measurement ID. If the secret is empty, analytics is disabled. The ID is visible in the published site. Course Board records the initial page view and fragment navigation; disable overlapping history-change measurement in Google Analytics to avoid duplicate views. [Analytics guide](https://github.com/lprakashv/course-board/blob/9e76c08de42190571454631d64c8f90572bcc89f/docs/publishing.md#add-analytics-to-the-default-site)
 
 ## Learner migration
 

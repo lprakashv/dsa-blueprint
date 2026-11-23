@@ -12,7 +12,7 @@ Studio uses the editor dependencies from a Course Board source checkout. The fol
 
 ```sh
 git clone https://github.com/lprakashv/course-board.git ../course-board
-git -C ../course-board checkout --detach 9940134f43064955555b3fb6012f013a50cbfc9d
+git -C ../course-board checkout --detach d3dc5f02b00f5aeeb35ea256c73147561593a3b4
 ```
 
 ```sh
@@ -20,7 +20,7 @@ npm --prefix ../course-board ci
 node ../course-board/src/cli.js author .
 ```
 
-Open [Course Board Studio](http://127.0.0.1:4175/). Select a lesson and edit the Markdown or attach a board. Select **Save course**, then reload the learner preview. Stop Studio with Ctrl+C. [Course Board authoring guide](https://github.com/lprakashv/course-board/blob/9940134f43064955555b3fb6012f013a50cbfc9d/docs/authoring.md)
+Open [Course Board Studio](http://127.0.0.1:4175/). Select a lesson and edit the Markdown or attach a board. Select **Save course**, then reload the learner preview. Stop Studio with Ctrl+C. [Course Board authoring guide](https://github.com/lprakashv/course-board/blob/d3dc5f02b00f5aeeb35ea256c73147561593a3b4/docs/authoring.md)
 
 ## Edit source files or import a bundle
 
@@ -31,7 +31,7 @@ Open [Course Board Studio](http://127.0.0.1:4175/). Select a lesson and edit the
 - Put board files under `public/` and set `diagram.src` relative to it. Write descriptive alternative text. Edit a migrated HTML board as a static file or replace it with a board attachment in Studio. To draw a new board, use Studio's Excalidraw editor. The learner renders attachments with Course Board's diagram types.
 - Change theme colors in `public/theme.css`. Review both device color schemes. Keep the interface accessible by keyboard and check a narrow screen.
 
-For bulk import, prepare a JSON bundle with a manifest, lessons, and optional maps from project destinations to source files. The bundle supplies the course outline. Course Board checks the result before it updates source files. The imported Markdown and assets are the editable source after import. [Bundle schema](https://github.com/lprakashv/course-board/blob/9940134f43064955555b3fb6012f013a50cbfc9d/schemas/ingest.json)
+For bulk import, prepare a JSON bundle with a manifest, lessons, and optional maps from project destinations to source files. The bundle supplies the course outline. Course Board checks the result before it updates source files. The imported Markdown and assets are the editable source after import. [Bundle schema](https://github.com/lprakashv/course-board/blob/d3dc5f02b00f5aeeb35ea256c73147561593a3b4/schemas/ingest.json)
 
 ```sh
 npm run ingest -- /path/to/course-bundle.json

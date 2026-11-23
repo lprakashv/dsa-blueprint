@@ -1,6 +1,6 @@
 # Course Board learner migration
 
-The stock learner now builds DSA Blueprint. The project pins Course Board commit `9940134`. [Upstream commit](https://github.com/lprakashv/course-board/commit/9940134f43064955555b3fb6012f013a50cbfc9d)
+The stock learner now builds DSA Blueprint. The project pins Course Board commit `d3dc5f0`. [Upstream commit](https://github.com/lprakashv/course-board/commit/d3dc5f02b00f5aeeb35ea256c73147561593a3b4)
 
 The migration used `course-board ingest` to write the manifest, Markdown lessons, snippets, and public assets. The 42 original lessons keep their IDs and the order of their numbered walkthrough steps. When you edit the files in Studio and save, the Course Board development server reads the same files on reload. The production build uses the same compiler and renders the same model in the stock learner.
 

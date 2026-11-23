@@ -1,4 +1,5 @@
-:root {
+:root,
+:root[data-color-mode="light"] {
   --canvas: #eef2f6;
   --paper: #ffffff;
   --ink: #192735;
@@ -16,8 +17,24 @@
   --heading-font: system-ui, sans-serif;
 }
 
+:root[data-color-mode="dark"] {
+  color-scheme: dark;
+  --canvas: #121a23;
+  --paper: #1b2733;
+  --ink: #e7eff7;
+  --muted: #b1c4d7;
+  --line: #435467;
+  --accent: #b8d5f2;
+  --accent-ink: #142e48;
+  --accent-tint: #293e54;
+  --sidebar: #151f2a;
+  --sidebar-active: #293e54;
+  --board-bg: #20212d;
+  --board-grid: #3d3e50;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-color-mode]) {
     color-scheme: dark;
     --canvas: #121a23;
     --paper: #1b2733;

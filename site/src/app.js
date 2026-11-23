@@ -1,8 +1,9 @@
 import { icon } from './icons.js'
 import { diagram, legend, escapeText as text } from './diagrams.js'
-import { lessons, modules } from './lessons.js'
+import { lessons, miscProblems, modules } from './lessons.js'
 import { getRoute, lessonLink } from './navigation.js'
 import { trackPageView } from './analytics.js'
+import { setupPanes } from './panes.js'
 import { labPatterns, parseLabInput } from './trace.js'
 
 const app = document.querySelector('#app')
@@ -21,6 +22,7 @@ function readProgress() {
 }
 
 const saved = readProgress()
+const paneWidths = { ...saved.paneWidths }
 const completed = new Set(Array.isArray(saved.completed) ? saved.completed.filter(id => lessons.some(lesson => lesson.id === id)) : [])
 let dark = saved.dark === true
 let route = getRoute(location.hash, lessons)
@@ -39,11 +41,13 @@ let speed = 1
 
 function saveProgress() {
   try {
-    localStorage.setItem(courseKey, JSON.stringify({ completed: [...completed], dark }))
+    localStorage.setItem(courseKey, JSON.stringify({ completed: [...completed], dark, paneWidths }))
   } catch {
     // The course still works if the browser disables local storage.
   }
 }
+
+const syncPanes = setupPanes(app, paneWidths, saveProgress)
 
 function loadLab() {
   const pattern = labPatterns[labId]
@@ -67,14 +71,13 @@ const room = value => text(value ?? '—')
 function header() {
   return `<header class="topbar">
     <a class="brand" href="#/" aria-label="DSA Blueprint home">
-      <span class="brand-icon">${icon('logo', 21)}</span>
-      <span>DSA<span class="brand-accent"> Blueprint</span><small>Coding interview patterns</small></span>
+      <span class="brand-name">DSA Blueprint</span><span class="brand-short" aria-hidden="true">DSA</span>
     </a>
     <nav class="top-nav" aria-label="Main navigation">${pages.map(([id, label, glyph]) =>
       `<a href="#/${id}"${current(route.page === id)}>${icon(glyph, 16)}<span>${label}</span></a>`).join('')}</nav>
     <div class="top-tools">
       <button class="search-trigger" type="button" data-action="search" id="search-trigger" aria-label="Search patterns">
-        ${icon('search', 16)}<span>Search patterns…</span><kbd>⌘ K</kbd>
+        ${icon('search', 16)}<span>Search patterns…</span><kbd>/</kbd>
       </button>
       <button class="icon-button" type="button" data-action="theme" id="theme-button" aria-label="${dark ? 'Use light theme' : 'Use dark theme'}">${icon(dark ? 'sun' : 'moon', 17)}</button>
       <button class="icon-button mobile-toggle" type="button" id="course-button" data-action="course" aria-expanded="${courseVisible}" aria-controls="course" aria-label="Toggle course outline">${icon('menu')}</button>
@@ -84,35 +87,33 @@ function header() {
 
 function sidebar() {
   return `<aside class="sidebar${courseVisible ? ' is-open' : ''}" id="course">
-    <div class="sidebar-head"><div><p class="eyebrow">${modules.length} MODULES</p><h2>Course outline</h2></div>
-      <span class="count-badge" title="${lessons.length} patterns">${lessons.length}</span></div>
-    <nav class="course-scroll" aria-label="Course outline">${modules.map(module => {
-      const done = module.lessons.filter(lesson => completed.has(lesson.id)).length
-      return `<details data-module="${module.name}"${opened.has(module.name) ? ' open' : ''}>
-        <summary><span class="module-icon ${module.color}">${icon(module.icon, 15)}</span>
-          <span class="module-name">${module.name}</span><span class="module-count">${done}/${module.lessons.length}</span>
-          <span class="module-chevron">${icon('chevron', 13)}</span></summary>
+    <nav class="course-scroll" aria-label="Course outline">${modules.map(module =>
+      `<details data-module="${module.name}"${opened.has(module.name) ? ' open' : ''}>
+        <summary><span class="module-name">${module.name}</span></summary>
         <div class="module-links">${module.lessons.map(lesson => `<a href="${lessonLink(lesson)}"${current(route.page === 'learn' && lesson === route.lesson)}>
           <span class="lesson-dot${completed.has(lesson.id) ? ' is-done' : ''}">${completed.has(lesson.id) ? icon('check', 10) : ''}</span>${lesson.title}</a>`).join('')}</div>
-      </details>`
-    }).join('')}</nav>
-    <div class="progress-card"><div class="progress-head"><span class="progress-icon">${icon('bars', 15)}</span><strong>Your progress</strong><span>${completed.size}/${lessons.length}</span></div>
+      </details>`).join('')}</nav>
+    <div class="progress-card"><div class="progress-head"><strong>Course progress</strong><span>${completed.size}/${lessons.length}</span></div>
       <progress value="${completed.size}" max="${lessons.length}" aria-label="Course progress"></progress>
-      <p>${completed.size} of ${lessons.length} patterns complete</p></div>
+    </div>
   </aside>`
 }
+
+const divider = (key, label, controls) =>
+  `<div class="pane-divider" data-resize="${key}" role="separator" aria-label="${label}" aria-controls="${controls}"
+    aria-orientation="vertical" tabindex="0"></div>`
 
 function metrics(frame) {
   const stats = frame.stats.length ? frame.stats : [
     ['Time complexity', route.lesson.time], ['Extra space', route.lesson.space],
   ]
-  return stats.map(([label, value]) => `<div class="metric"><span>${text(label)}</span><strong>${room(value)}</strong></div>`).join('')
+  return stats.map(([label, value]) => `<div class="metric"><dt>${text(label)}</dt><dd>${room(value)}</dd></div>`).join('')
 }
 
 function player() {
-  return `<section class="player panel" aria-label="Algorithm visualization">
+  return `<section class="player panel" aria-labelledby="whiteboard-title">
     <div class="player-header">
-      <div class="player-title"><span class="visual-icon">${icon('array', 17)}</span><span>Visualization</span></div>
+      <h3 id="whiteboard-title">Whiteboard</h3>
       <div class="player-tools">
         <label class="speed"><span class="sr-only">Playback speed</span><select id="speed" data-field="speed">
           ${[0.5, 1, 1.5, 2].map(value => `<option value="${value}"${selected(speed === value)}>${value}×</option>`).join('')}
@@ -121,59 +122,61 @@ function player() {
         <button id="play" class="play-button" data-action="play">${icon('play', 14)} Play</button>
       </div>
     </div>
+    <dl class="metrics" id="metrics" aria-label="Example state"></dl>
     <div class="stage">
-      <div class="metrics" id="metrics"></div>
       <div class="stage-art" id="stage-art"></div>
-      <div class="legend" id="legend"></div>
     </div>
-    <div id="timeline"></div>
+    <div id="board-note"></div>
+    <div class="legend" id="legend"></div>
   </section>`
 }
 
-function timeline() {
+const controlLabel = (label, glyph) =>
+  `<span class="control-caption">${label}</span><span class="control-symbol" aria-hidden="true">${glyph}</span>`
+
+function stepControls(expanded) {
   const index = getIndex()
   const frames = getFrames()
-  return `<div class="timeline">
-    <div class="timeline-head"><h2 class="eyebrow">${route.page === 'learn' ? 'LESSON TIMELINE' : 'TRACE TIMELINE'}</h2><span>Step <strong>${index + 1}</strong> of ${frames.length}</span></div>
-    <ol class="step-track" aria-label="Steps">
-      ${frames.map((frame, i) => `<li class="${i < index ? 'past' : i === index ? 'present' : ''}">
-        <button type="button" data-action="step" data-index="${i}" id="step-${i}"${i === index ? ' aria-current="step"' : ''}>
-          <span class="step-number">${i + 1}</span><span class="step-name">${text(frame.label)}</span></button></li>`).join('')}
-    </ol>
-  </div>`
+  const last = index === frames.length - 1
+  let next = `<button type="button" id="next" class="primary-button" data-action="next" aria-label="Next step"${disabled(last)}>${controlLabel('Next', '→')}</button>`
+  if (last && route.page === 'learn') {
+    const nextLesson = lessons[lessons.indexOf(route.lesson) + 1]
+    const target = nextLesson ? lessonLink(nextLesson) : '#/reference'
+    const label = nextLesson ? 'Next lesson' : 'Open cheatsheets'
+    next = completed.has(route.lesson.id)
+      ? `<a id="next" class="primary-button" href="${target}" aria-label="${label}">${controlLabel('Next', '→')}</a>`
+      : `<button type="button" id="complete" class="primary-button" data-action="complete" aria-label="Complete lesson">${controlLabel('Finish', '✓')}</button>`
+  }
+  return `<nav class="step-controls" aria-label="Step navigation">
+    <button type="button" id="previous" class="secondary-button" data-action="previous" aria-label="Previous step"${disabled(index === 0)}>${controlLabel('Back', '←')}</button>
+    <details class="step-menu"${expanded ? ' open' : ''}>
+      <summary id="step-menu" class="secondary-button" aria-label="Steps, step ${index + 1} of ${frames.length}">
+        ${controlLabel(`Step ${index + 1} of ${frames.length}`, `${index + 1}/${frames.length}`)}
+      </summary>
+      <ol class="step-list" aria-label="Steps">${frames.map((frame, i) =>
+        `<li><button type="button" data-action="step" data-index="${i}" id="step-${i}"${i === index ? ' aria-current="step"' : ''}>
+          <span>${i + 1}</span>${text(frame.title)}</button></li>`).join('')}
+      </ol>
+    </details>
+    ${next}
+  </nav>`
 }
 
 function guide() {
-  const index = getIndex()
-  const frames = getFrames()
   const frame = currentFrame()
-  const inLesson = route.page === 'learn'
-  const last = index === frames.length - 1
-  const done = completed.has(route.lesson.id)
-  const nextLesson = lessons[lessons.indexOf(route.lesson) + 1]
-  const action = last && inLesson
-    ? done
-      ? `<a class="primary-button" href="${nextLesson ? lessonLink(nextLesson) : '#/reference'}">${nextLesson ? 'Next pattern' : 'Cheatsheets'} ${icon('right', 16)}</a>`
-      : `<button id="complete" class="primary-button" data-action="complete">Complete lesson ${icon('check', 16)}</button>`
-    : `<button id="next" class="primary-button" data-action="next"${disabled(last)}>Next step ${icon('right', 16)}</button>`
-  return `<section class="guide-card panel">
-    <div class="guide-meta"><span class="step-chip">STEP ${String(index + 1).padStart(2, '0')}</span><span>${last ? 'Summary' : index === 0 ? 'Setup' : 'Walkthrough'}</span></div>
-    <div class="guide-copy">
-      <h2>${text(frame.title)}</h2><p>${text(frame.body)}</p>
-    </div>
-    ${inLesson ? `<div class="insight"><span class="insight-icon">${icon('bulb', 18)}</span>
-      <div><h3>${index === 0 ? 'PATTERN SIGNAL' : 'INVARIANT'}</h3>
-      <p>${text(index === 0 ? route.lesson.signal : route.lesson.invariant)}</p></div></div>` : ''}
-    <div class="guide-actions">
-      <button id="previous" class="secondary-button" data-action="previous"${disabled(index === 0)}>${icon('left', 15)} Back</button>
-      ${action}
-    </div>
-  </section>`
+  const first = getIndex() === 0
+  return `<div class="guide-card panel">
+    <p>${text(frame.body)}</p>
+    ${route.page === 'learn' ? `<div class="insight">
+      <h3>${first ? 'Pattern signal' : 'Invariant'}</h3>
+      <p>${text(first ? route.lesson.signal : route.lesson.invariant)}</p>
+    </div>` : ''}
+  </div>`
 }
 
 function interviewCard(lesson) {
   return `<section class="interview-card panel">
-    <h2>${icon('target', 18)} Interview notes</h2>
+    <h3>${icon('target', 18)} Interview notes</h3>
     <div class="complexity">
       <div><span>TIME</span><strong>${text(lesson.time)}</strong></div>
       <div><span>SPACE</span><strong>${text(lesson.space)}</strong></div>
@@ -188,38 +191,40 @@ function learn() {
   const module = modules.find(module => module.lessons.includes(lesson))
   const position = module.lessons.indexOf(lesson) + 1
   return `<div class="study">
-    <div class="workbench">
-      <header class="lesson-head">
-        <div class="breadcrumb"><span>Learn</span>${icon('chevron', 12)}<span>${module.name}</span></div>
-        <div class="lesson-title"><h1>${lesson.title}</h1>
-          ${completed.has(lesson.id) ? '<span class="pill finished">Completed</span>' : ''}</div>
-        <p class="lede">${lesson.summary}</p>
-        <div class="lesson-meta"><span class="pill difficulty ${lesson.difficulty.toLowerCase()}"><i></i>${lesson.difficulty}</span>
-          <span class="pill">${icon('clock', 13)} ${lesson.minutes} min</span>
-          <span class="pill">${icon('list', 14)} ${lesson.steps.length} steps</span>
-        </div>
-      </header>
-      ${player()}
-      <details class="code-panel panel"><summary>${icon('code', 17)} Python implementation <span>Lesson ${position} of ${module.lessons.length}</span>${icon('down', 15)}</summary>
-        <div class="code-wrap"><pre><code>${text(lesson.code)}</code></pre></div></details>
+    <header class="lesson-title-row">
+      <div class="lesson-title"><h1>${lesson.title}</h1>
+        ${completed.has(lesson.id) ? '<span class="pill finished">Completed</span>' : ''}</div>
+      <div id="step-controls"></div>
+    </header>
+    <div class="lesson-head">
+      <p class="lesson-meta"><span>${module.name} · Lesson ${position} of ${module.lessons.length}</span>
+        <span>${lesson.difficulty} · ${lesson.minutes} min</span></p>
+      <p class="lede">${lesson.summary}</p>
     </div>
-    <aside class="guide-column" aria-label="Lesson guide">
-      <div class="column-title"><span class="column-icon">${icon('book', 16)}</span> Lesson guide</div>
-      <div id="guide"></div>
-      ${interviewCard(lesson)}
-      <div class="shortcuts"><span><kbd>←</kbd> <kbd>→</kbd> Step</span><span><kbd>Space</kbd> Play</span><span><kbd>R</kbd> Reset</span></div>
-    </aside>
+    <h2 id="step-title" class="stage-heading"></h2>
+    <div class="lesson-workspace">
+      ${player()}
+      ${divider('reading', 'Lesson text width', 'lesson-reading')}
+      <aside class="guide-column" id="lesson-reading" aria-labelledby="step-title">
+        <div id="guide"></div>
+        ${interviewCard(lesson)}
+        <div class="shortcuts"><span><kbd>←</kbd> <kbd>→</kbd> Step</span><span><kbd>Space</kbd> Play</span><span><kbd>R</kbd> Reset</span></div>
+      </aside>
+    </div>
+    <details class="code-panel panel"><summary>${icon('code', 17)} Python implementation ${icon('down', 15)}</summary>
+      <div class="code-wrap"><pre><code>${text(lesson.code)}</code></pre></div>
+    </details>
   </div>`
 }
 
-function pageHeading(name, title, description) {
-  return `<header class="page-head"><div class="breadcrumb">DSA Blueprint ${icon('chevron', 12)} ${name}</div><h1>${title}</h1><p class="lede">${description}</p></header>`
+function pageHeading(title, description) {
+  return `<header class="page-head"><h1>${title}</h1><p class="lede">${description}</p></header>`
 }
 
 function challengePicker(lesson) {
-  return `<nav class="challenge-picker" aria-label="Hard problems">
-    <h2>Hard problems</h2>
-    <ul>${lessons.filter(item => item.challenge).map(item => `<li>
+  return `<nav class="challenge-picker" aria-labelledby="misc-problems-heading">
+    <h2 id="misc-problems-heading">${miscProblems.name}</h2>
+    <ul>${miscProblems.lessons.map(item => `<li>
       <a href="#/practice/${item.id}"${current(item === lesson)}>${text(item.title)}${icon('right', 14)}</a>
     </li>`).join('')}</ul>
   </nav>`
@@ -258,7 +263,7 @@ function practice() {
     ${answered ? `<div class="answer-feedback ${correct ? 'correct' : 'incorrect'}" role="status">
       <strong>${correct ? 'Correct' : 'Review this answer'}</strong><p>${text(question.why)}</p></div>` : ''}`
   return `<div class="section-page">
-    ${pageHeading('Practice', 'Practice the patterns', 'Work through an interview problem or check when to use a pattern.')}
+    ${pageHeading('Practice the patterns', 'Work through an interview problem or check when to use a pattern.')}
     ${challengePicker(lesson)}
     <div class="practice-grid">
       <section class="panel exercise-card" aria-label="${challenge ? 'Problem statement' : 'Pattern question'}">
@@ -288,7 +293,7 @@ function practice() {
 function lab() {
   const pattern = labPatterns[labId]
   return `<div class="section-page lab-page">
-    ${pageHeading('Playground', 'Algorithm playground', 'Change the inputs and step through the new trace.')}
+    ${pageHeading('Algorithm playground', 'Change the inputs and step through the new trace.')}
     <form id="lab-form" class="panel lab-form" novalidate>
       <div class="field-label"><label for="lab-select">Pattern</label><select id="lab-select" data-field="lab">${Object.entries(labPatterns).map(([id, item]) =>
         `<option value="${id}"${selected(id === labId)}>${item.title}</option>`).join('')}</select></div>
@@ -298,13 +303,17 @@ function lab() {
       <p class="${labError ? 'form-error' : 'subtle'}" id="lab-hint"${labError ? ' role="alert"' : ''}>${labError ? text(labError) :
         `Use 2–10 comma-separated integers${pattern.sorted ? ' in ascending order' : ''}.`}</p>
     </form>
-    <div class="lab-layout">${player()}<aside id="guide" aria-label="Trace guide"></aside></div>
+    <div class="trace-title"><h2 id="step-title" class="stage-heading"></h2><div id="step-controls"></div></div>
+    <div class="lesson-workspace">${player()}
+      ${divider('reading', 'Trace text width', 'lesson-reading')}
+      <aside class="guide-column" id="lesson-reading" aria-labelledby="step-title"><div id="guide"></div></aside>
+    </div>
   </div>`
 }
 
 function reference() {
   return `<div class="section-page reference-page">
-    ${pageHeading('Cheatsheets', 'Pattern cheatsheets', 'Review when to use each pattern and what to say in an interview.')}
+    ${pageHeading('Pattern cheatsheets', 'Review when to use each pattern and what to say in an interview.')}
     ${modules.map(module => `<section class="reference-group"><h2><span class="module-icon ${module.color}">${icon(module.icon, 16)}</span>${module.name}</h2>
       <div class="reference-grid">${module.lessons.map(lesson => `<article class="panel reference-card">
         <h3><a href="${lessonLink(lesson)}">${lesson.title} ${icon('right', 15)}</a></h3>
@@ -342,18 +351,15 @@ function paintFrame(animate = false) {
   const before = Object.fromEntries([...art.querySelectorAll('[data-motion]')].map(item => [item.dataset.motion, item.getBoundingClientRect().left]))
   document.querySelector('#metrics').innerHTML = metrics(frame)
   art.innerHTML = diagram(frame.scene)
+  const note = art.querySelector('.scene-note')
+  document.querySelector('#board-note').replaceChildren(...(note ? [note] : []))
   document.querySelector('#legend').innerHTML = legend(frame.scene).map(([color, label]) =>
     `<span><i class="legend-dot ${color}"></i>${label}</span>`).join('')
-  const oldScroll = document.querySelector('.step-track')?.scrollLeft ?? 0
-  document.querySelector('#timeline').innerHTML = timeline()
-  const track = document.querySelector('.step-track')
-  const marker = track.querySelector('[aria-current="step"]').parentElement
-  track.scrollLeft = oldScroll
-  if (marker.offsetLeft < track.scrollLeft) {
-    track.scrollLeft = marker.offsetLeft
-  } else if (marker.offsetLeft + marker.offsetWidth > track.scrollLeft + track.clientWidth) {
-    track.scrollLeft = marker.offsetLeft + marker.offsetWidth - track.clientWidth
-  }
+  const menu = document.querySelector('.step-menu')
+  const scroll = menu?.querySelector('.step-list').scrollTop ?? 0
+  document.querySelector('#step-controls').innerHTML = stepControls(menu?.open)
+  document.querySelector('.step-list').scrollTop = scroll
+  document.querySelector('#step-title').textContent = frame.title
   if (animate) {
     document.querySelector('#announcement').textContent =
       `Step ${getIndex() + 1} of ${getFrames().length}. ${frame.title}. ${frame.body}`
@@ -381,9 +387,10 @@ function render(focusId = '') {
   document.title = `${route.page === 'learn' ? route.lesson.title : pages.find(([id]) => id === route.page)[1]} · DSA Blueprint`
   const view = { learn, practice, lab, reference }[route.page]
   app.innerHTML = `<a class="skip-link" href="#content" data-action="skip">Skip to content</a>${header()}
-    <div class="layout">${sidebar()}<main id="content" tabindex="-1">${view()}</main></div>${searchDialog()}
+    <div class="layout">${sidebar()}${divider('nav', 'Course navigation width', 'course')}<main id="content" tabindex="-1">${view()}</main></div>${searchDialog()}
     <div class="sr-only" id="announcement" role="status"></div>`
   if (visualPage()) paintFrame()
+  syncPanes()
   const outline = document.querySelector('.course-scroll')
   outline.scrollTop = sidebarScroll ?? 0
   const activeLesson = outline.querySelector('[aria-current="page"]')
@@ -408,7 +415,7 @@ function goStep(index) {
   paintFrame(true)
   if (!focusId) return
   const focus = document.getElementById(focusId)
-  const fallback = document.getElementById('complete') ?? document.getElementById(`step-${index}`)
+  const fallback = document.getElementById('complete') ?? document.getElementById('step-menu')
   const target = focus && !focus.disabled ? focus : fallback
   target?.focus({ preventScroll: true })
 }
@@ -443,6 +450,8 @@ function selectStep(index) {
 function openSearch() {
   const dialog = document.querySelector('#search-dialog')
   if (dialog.open) return
+  const menu = document.querySelector('.step-menu[open]')
+  if (menu) menu.open = false
   searchResults()
   dialog.showModal()
   document.querySelector('#search-input').focus()
@@ -450,15 +459,16 @@ function openSearch() {
 
 function routeChanged() {
   stop()
-  const previousPage = route.page
+  const previous = route
   route = getRoute(location.hash, lessons)
   const module = modules.find(item => item.lessons.includes(route.lesson))
+  if (!module.lessons.includes(previous.lesson)) opened.clear()
   opened.add(module.name)
   if (route.page === 'practice') {
     practiceId = route.lesson.id
     choice = null
   }
-  if (route.page === 'lab' && previousPage !== 'lab' && Object.hasOwn(labPatterns, route.lesson.id)) {
+  if (route.page === 'lab' && previous.page !== 'lab' && Object.hasOwn(labPatterns, route.lesson.id)) {
     labId = route.lesson.id
     loadLab()
   }
@@ -476,6 +486,8 @@ app.addEventListener('toggle', event => {
 }, true)
 
 app.addEventListener('click', event => {
+  const menu = document.querySelector('.step-menu[open]')
+  if (menu && !menu.contains(event.target)) menu.open = false
   const trigger = event.target.closest('[data-action]')
   if (!trigger) return
   const { action, index } = trigger.dataset
@@ -515,13 +527,14 @@ app.addEventListener('click', event => {
       selectStep(getIndex() - 1)
       break
     case 'step':
+      trigger.closest('.step-menu').open = false
+      document.querySelector('#step-menu').focus({ preventScroll: true })
       selectStep(Number(index))
       break
     case 'complete':
       completed.add(route.lesson.id)
       saveProgress()
-      render()
-      document.querySelector('.guide-actions a')?.focus()
+      render('next')
       break
     case 'answer':
       if (choice === null) {
@@ -581,13 +594,22 @@ app.addEventListener('submit', event => {
 })
 
 document.addEventListener('keydown', event => {
-  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+  if (event.defaultPrevented) return
+  const menu = document.querySelector('.step-menu[open]')
+  if (event.key === 'Escape' && menu) {
+    event.preventDefault()
+    menu.open = false
+    menu.querySelector('summary').focus()
+    return
+  }
+  const editing = event.target.closest('input, select, textarea, [contenteditable]')
+  if (((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') || (event.key === '/' && !editing && !event.altKey && !event.metaKey && !event.ctrlKey)) {
     event.preventDefault()
     openSearch()
     return
   }
   if (!visualPage() || document.querySelector('#search-dialog').open ||
-      event.target.closest('input, select, textarea, [contenteditable]') || event.metaKey || event.ctrlKey || event.altKey) return
+      editing || event.metaKey || event.ctrlKey || event.altKey) return
   if (event.key === 'ArrowRight') selectStep(getIndex() + 1)
   else if (event.key === 'ArrowLeft') selectStep(getIndex() - 1)
   else if (event.key.toLowerCase() === 'r') selectStep(0)

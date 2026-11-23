@@ -18,7 +18,7 @@ export const minimumWindow = {
     constraints: ['Each string contains 1 to 100,000 English letters.', 'Match uppercase and lowercase letters separately.'],
     hints: [
       'For each target letter, track how many more copies the current window needs. A count can go below zero when the window has surplus copies.',
-      'When all required copies are present, record the window and move the left edge until a requirement breaks. Then extend the right edge again.',
+      'When all required copies are present, record the window and move the left edge until a requirement breaks. A removal creates a shortage only when that letter’s count becomes positive.',
     ],
   },
   steps: [
@@ -77,7 +77,7 @@ export const largestRectangle = {
   difficulty: 'Hard', minutes: 16, time: 'O(n)', space: 'O(n)',
   signal: 'Look for the widest span where every bar reaches a candidate height. A shorter bar sets a boundary.',
   invariant: 'Stack heights are nondecreasing. A stacked bar is waiting for a strictly shorter bar on its right.',
-  pitfall: 'After you pop, use the new stack top as the left boundary. Exclude both boundaries from the width.',
+  pitfall: 'Use the new stack top as the exclusive left boundary. With equal heights, the earliest equal bar eventually spans the full plateau.',
   challenge: {
     slug: 'largest-rectangle-in-histogram',
     prompt: 'The array lists the heights of adjacent bars, each one unit wide. Find the maximum area of an axis-aligned rectangle that rests on the baseline and fits under the bars it spans.',

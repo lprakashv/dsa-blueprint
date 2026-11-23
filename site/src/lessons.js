@@ -4,6 +4,8 @@ import { indexTrees } from './index-tree-lessons.js'
 import { connectivity } from './graph-lessons.js'
 import { matrices } from './grid-lessons.js'
 import { minimumWindow, largestRectangle, wordLadder, obstaclePath, burstBalloons } from './challenge-lessons.js'
+import { prefixBalance, linkedGap, treePostorder, extremesDP, knapsack, answerSearch, arrayIndex } from './interview-pattern-lessons.js'
+import { miscLessons } from './misc-lessons.js'
 const lanes = (rows, caption) => ({ type: 'lanes', rows, caption })
 const intervals = (groups, end, caption) => ({ type: 'intervals', groups, end, caption })
 
@@ -32,13 +34,15 @@ const arrays = [
       '        if total < target:', '            left += 1', '        else:', '            right -= 1', '    return None'),
     practice: quiz('The sum is larger than the target. Which pointer moves?', ['Left moves right', 'Right moves left', 'Both move inward'], 1,
       'Right points to the largest remaining value. Moving it left can lower the sum.',
-      [['Two Sum II', 'two-sum-ii-input-array-is-sorted'], ['Container With Most Water', 'container-with-most-water']]),
+      [['Two Sum II', 'two-sum-ii-input-array-is-sorted'], ['Container With Most Water', 'container-with-most-water'],
+        ['Valid Palindrome II', 'valid-palindrome-ii'],
+        ['For one allowed deletion, test both remaining ranges at the first mismatch.']]),
   },
   {
     id: 'sliding-window', title: 'Sliding Window', problem: 'Maximum Sum of K Adjacent Values',
     summary: 'Update a running sum as a fixed-size window moves across an array.',
     difficulty: 'Beginner', minutes: 7, time: 'O(n)', space: 'O(1)',
-    signal: 'Look for the best contiguous substring or subarray. Check if its length is fixed.',
+    signal: 'A fixed window keeps the same length. A variable window moves its left edge when doing so can restore or improve a valid range.',
     invariant: 'The running sum equals the sum of exactly k elements in the current window.',
     pitfall: 'Initialize the maximum from the first window. A zero default fails when all values are negative.',
     steps: slidingWindow([2, 1, 5, 1, 3, 2], 3).steps,
@@ -48,7 +52,8 @@ const arrays = [
     practice: quiz('A fixed window moves one index to the right. How do you update its sum?',
       ['Subtract the outgoing value and add the incoming value', 'Add both boundary values', 'Recompute every value in the window'], 0,
       'The overlapping elements stay in the window. Only its first and last positions change membership.',
-      [['Maximum Average Subarray I', 'maximum-average-subarray-i'], ['Longest Substring Without Repeating Characters', 'longest-substring-without-repeating-characters']]),
+      [['Maximum Average Subarray I', 'maximum-average-subarray-i'], ['Max Consecutive Ones III', 'max-consecutive-ones-iii'],
+        ['Longest Substring Without Repeating Characters', 'longest-substring-without-repeating-characters']]),
   },
   {
     id: 'prefix-sum', title: 'Prefix Sum', problem: 'Sum an Inclusive Range',
@@ -71,7 +76,7 @@ const arrays = [
       '    return prefix', '', 'def range_sum(prefix, left, right):', '    return prefix[right + 1] - prefix[left]'),
     practice: quiz('Which formula sums the inclusive range [0, 2]?', ['prefix[2] − prefix[0]', 'prefix[3] − prefix[1]', 'prefix[3] − prefix[0]'], 2,
       'prefix[3] includes the first three items, and prefix[0] subtracts zero.',
-      [['Range Sum Query', 'range-sum-query-immutable'], ['Subarray Sum Equals K', 'subarray-sum-equals-k']]),
+      [['Range Sum Query', 'range-sum-query-immutable'], ['Find Pivot Index', 'find-pivot-index']]),
   },
   {
     id: 'hash-map', title: 'Hash Map Lookup', problem: 'Two Sum on an Unsorted Array',
@@ -183,7 +188,7 @@ const structures = [
       '            return False', '    return not stack'),
     practice: quiz('Why does ([)] fail?', ['The string has an odd length', 'The ) does not match the top bracket', 'The string starts with ('], 1,
       'When ) arrives, the last unmatched opening bracket is [. The closing order is invalid.',
-      [['Valid Parentheses', 'valid-parentheses'], ['Min Stack', 'min-stack']]),
+      [['Valid Parentheses', 'valid-parentheses'], ['Min Stack', 'min-stack'], ['Decode String', 'decode-string']]),
   },
   {
     id: 'linked-list', title: 'Linked List Reversal', problem: 'Reverse a Singly Linked List',
@@ -206,7 +211,8 @@ const structures = [
       '        next_node = cur.next', '        cur.next = prev', '        prev, cur = cur, next_node', '    return prev'),
     practice: quiz('Which reference must you save before you change cur.next?', ['The original head', 'The original cur.next', 'The new head'], 1,
       'The original next node is the entry point for the untouched suffix.',
-      [['Reverse Linked List', 'reverse-linked-list'], ['Reverse Linked List II', 'reverse-linked-list-ii']]),
+      [['Reverse Linked List', 'reverse-linked-list'], ['Reverse Linked List II', 'reverse-linked-list-ii'],
+        ['Reorder List', 'reorder-list']]),
   },
   {
     id: 'heap', title: 'Heap / Top K', problem: 'Find the K Largest Values',
@@ -266,7 +272,8 @@ const graphs = [
     practice: quiz('When can BFS guarantee a shortest path measured in total cost?',
       ['When all edges have the same positive cost', 'When edge costs are all different', 'Whenever the graph has a cycle'], 0,
       'BFS minimizes the number of edges. With equal positive cost per edge, that also minimizes cost.',
-      [['Binary Tree Level Order Traversal', 'binary-tree-level-order-traversal'], ['Rotting Oranges', 'rotting-oranges']]),
+      [['Binary Tree Level Order Traversal', 'binary-tree-level-order-traversal'],
+        ['Shortest Path in Binary Matrix', 'shortest-path-in-binary-matrix']]),
   },
   {
     id: 'dfs', title: 'Depth-First Search', problem: 'Explore a Connected Component',
@@ -354,7 +361,9 @@ const decisionsLessons = [
       '', '    visit(0)', '    return paths'),
     practice: quiz('Why does the code pop after a recursive call?', ['To sort the result', 'To restore the path for the next choice', 'To discard every saved result'], 1,
       'Each sibling branch must start from the same path that existed before the choice.',
-      [['Subsets', 'subsets'], ['Combination Sum', 'combination-sum']]),
+      [['Subsets', 'subsets'], ['Combination Sum', 'combination-sum'],
+        ['Split a String Into the Max Number of Unique Substrings', 'split-a-string-into-the-max-number-of-unique-substrings'],
+        ['For unique splits, keep a set on the current branch. Prune when the remaining characters cannot improve the best count.']]),
   },
   {
     id: 'dynamic-programming', title: 'Dynamic Programming', problem: 'Count Ways to Climb Stairs',
@@ -408,13 +417,19 @@ const decisionsLessons = [
   },
 ]
 
+export const miscProblems = {
+  name: 'Misc Problems', icon: 'target', color: 'orange',
+  lessons: [minimumWindow, largestRectangle, wordLadder, obstaclePath, burstBalloons, ...miscLessons],
+}
+
 export const modules = [
-  { name: 'Arrays & Strings', icon: 'array', color: 'purple', lessons: [...arrays, minimumWindow] },
-  { name: 'Search & Sorting', icon: 'search', color: 'blue', lessons: ordered },
-  { name: 'Data Structures', icon: 'layers', color: 'teal', lessons: [...structures, ...indexTrees, largestRectangle] },
-  { name: 'Trees & Graphs', icon: 'branch', color: 'orange', lessons: [...graphs, ...connectivity, wordLadder] },
-  { name: 'Matrices & Grids', icon: 'grid', color: 'blue', lessons: [...matrices, obstaclePath] },
-  { name: 'Optimization', icon: 'bolt', color: 'pink', lessons: [...decisionsLessons, burstBalloons] },
+  { name: 'Arrays & Strings', icon: 'array', color: 'purple', lessons: [...arrays, prefixBalance] },
+  { name: 'Search & Sorting', icon: 'search', color: 'blue', lessons: [...ordered, answerSearch] },
+  { name: 'Data Structures', icon: 'layers', color: 'teal', lessons: [...structures, linkedGap, arrayIndex, ...indexTrees] },
+  { name: 'Trees & Graphs', icon: 'branch', color: 'orange', lessons: [...graphs, treePostorder, ...connectivity] },
+  { name: 'Matrices & Grids', icon: 'grid', color: 'blue', lessons: matrices },
+  { name: 'Optimization', icon: 'bolt', color: 'pink', lessons: [...decisionsLessons, knapsack, extremesDP] },
+  miscProblems,
 ]
 
 export const lessons = modules.flatMap(module => module.lessons)

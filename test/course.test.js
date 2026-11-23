@@ -2,11 +2,14 @@ import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import test from 'node:test'
 import { diagram, escapeText, legend } from '../site/src/diagrams.js'
-import { lessons } from '../site/src/lessons.js'
+import { lessons, miscProblems } from '../site/src/lessons.js'
 import { getRoute, lessonLink } from '../site/src/navigation.js'
 
 test('every lesson has renderable frames, a valid link and a practice answer', () => {
   assert.equal(new Set(lessons.map(lesson => lesson.id)).size, lessons.length)
+  const challenges = lessons.filter(lesson => lesson.challenge)
+  assert.deepEqual(challenges, miscProblems.lessons)
+  assert.equal(new Set(challenges.map(lesson => lesson.challenge.slug)).size, challenges.length)
   for (const lesson of lessons) {
     const { practice } = lesson
     assert.ok(practice.options[practice.answer])
@@ -18,6 +21,7 @@ test('every lesson has renderable frames, a valid link and a practice answer', (
       assert.match(slug, /^[a-z0-9-]+$/)
       assert.ok(prompt && input && output && explanation)
       assert.ok(constraints.length && hints.length >= 2)
+      assert.equal(getRoute(`#/practice/${lesson.id}`, lessons).lesson, lesson)
     }
     assert.ok(lesson.steps.length >= 2)
     for (const [index, frame] of lesson.steps.entries()) {
@@ -46,12 +50,16 @@ test('all Python implementations solve the lesson example', () => {
     'two-pointers': 'pair_sum([1, 2, 4, 6, 8, 12], 10) == (1, 4) and pair_sum([1, 2], 5) is None',
     'sliding-window': 'max_window([2, 1, 5, 1, 3, 2], 3) == 9 and max_window([-4, -2], 1) == -2',
     'prefix-sum': 'range_sum(build_prefix([2, 4, 1, 3]), 1, 3) == 8',
+    'prefix-sum-hash-map': 'longest_balanced([1, 0, 1, 1, 0, 0]) == 6 and longest_balanced([1, 1, 0, 0, 0]) == 4 and longest_balanced([1, 1]) == 0',
     'hash-map': 'two_sum([4, 1, 5, 8], 9) == (0, 2) and two_sum([4], 8) is None',
     'minimum-window-substring': 'minimum_window("CABACBD", "AAB") == "ABA" and minimum_window("AB", "AA") == "" and minimum_window("baab", "ab") == "ba" and minimum_window("aA", "A") == "A"',
     'binary-search': 'binary_search([1, 3, 5, 7, 9, 11, 13], 11) == 5 and binary_search([], 1) == -1',
+    'binary-search-on-answer': 'minimum_rate([3, 5, 8], 6) == 3 and minimum_rate([3, 5, 8], 3) == 8 and minimum_rate([3, 5, 8], 16) == 1',
     intervals: 'merge_intervals([[1, 3], [2, 6], [8, 10], [9, 12]]) == [[1, 6], [8, 12]]',
     stack: 'valid_brackets("{[]}") and not valid_brackets("([)]") and not valid_brackets("<")',
     'linked-list': 'reverse_list(first) is third and third.next is second and second.next is first and first.next is None',
+    'linked-list-gap': 'check_remove_nth()',
+    'array-index-map': 'check_randomized_set()',
     heap: 'sorted(top_k([4, 1, 7, 3, 9], 3)) == [4, 7, 9]',
     'b-tree': 'check_btree()',
     'b-plus-tree': 'check_bplus()',
@@ -59,6 +67,7 @@ test('all Python implementations solve the lesson example', () => {
     bfs: 'shortest_distance({"A": ["B", "C"], "B": ["D", "E"], "C": ["F"]}, "A", "F") == 2',
     dfs: 'reachable({"A": ["B", "C"], "B": ["A", "D", "E"], "C": ["F"]}, "A") == set("ABCDEF")',
     'topological-sort': 'task_order({"A": ["B", "C"], "B": ["D"], "C": ["D"]}) == list("ABCD") and task_order({"A": ["B"], "B": ["A"]}) is None',
+    'tree-postorder': 'diameter(example_tree()) == 3 and diameter(TreeNode(1)) == diameter(None) == 0 and diameter(deep_tree()) == 1999',
     'union-find': 'check_union_find()',
     dijkstra: 'dijkstra({"A": [("B", 4), ("C", 1)], "C": [("B", 2), ("D", 6)], "B": [("D", 1)]}, "A") == ({"A": 0, "B": 3, "C": 1, "D": 4}, {"B": "C", "C": "A", "D": "B"})',
     'bellman-ford': 'bellman_ford(4, [(2, 3, 1), (1, 2, -2), (0, 1, 4), (0, 2, 5)], 0) == [0, 4, 2, 3] and bellman_ford(3, [(1, 2, -2), (2, 1, 0)], 0) == [0, float("inf"), float("inf")] and rejects_negative_cycle(bellman_ford, 2, [(0, 1, 0), (1, 0, -1)], 0)',
@@ -71,17 +80,117 @@ test('all Python implementations solve the lesson example', () => {
     'grid-obstacle-elimination': 'check_obstacle_paths()',
     backtracking: 'subsets([1, 2]) == [[], [1], [1, 2], [2]]',
     'dynamic-programming': 'climb_stairs(4) == 5 and climb_stairs(0) == 1',
+    'knapsack-01': 'can_partition([2, 3, 4, 1]) and not can_partition([2, 3, 7]) and not can_partition([1, 2, 4])',
+    'dp-min-max': 'check_maximum_product()',
     greedy: 'compatible_meetings([(1, 3), (2, 4), (3, 5), (5, 7)]) == [(1, 3), (3, 5), (5, 7)]',
     'burst-balloons': 'check_balloon_orders()',
+    'median-of-two-sorted-arrays': 'check_median()',
+    'binary-tree-maximum-path-sum': 'max_path_sum(example_tree()) == 10 and max_path_sum(TreeNode(-8, TreeNode(-2))) == -2 and max_path_sum(deep_tree()) == 2000 and max_path_sum(TreeNode(-50, example_tree())) == 10',
+    'reverse-nodes-in-k-group': 'check_reversed_groups()',
+    'word-search-ii': 'check_word_search()',
+    'split-array-largest-sum': 'check_split_largest_sum()',
   }
   const setup = `
 from collections import deque
 from functools import lru_cache
-from itertools import product
+from itertools import combinations, combinations_with_replacement, product
+from math import prod
+from statistics import median
 
 class Node: pass
 first, second, third = Node(), Node(), Node()
 first.next, second.next, third.next = second, third, None
+
+class TreeNode:
+    def __init__(self, value, left=None, right=None):
+        self.val, self.left, self.right = value, left, right
+
+def example_tree():
+    return TreeNode(-5, TreeNode(4, TreeNode(3), TreeNode(-6)), TreeNode(8))
+
+def deep_tree():
+    root = None
+    for _ in range(2000):
+        root = TreeNode(1, root)
+    return root
+
+def list_nodes(*values):
+    nodes = tuple(ListNode(value) for value in values)
+    for node, next_node in zip(nodes, nodes[1:]):
+        node.next = next_node
+    return nodes
+
+def has_order(head, expected):
+    for node in expected:
+        if head is not node:
+            return False
+        head = head.next
+    return head is None
+
+def check_remove_nth():
+    a, b, c, d = list_nodes(1, 2, 3, 4)
+    assert has_order(remove_nth(a, 2), (a, b, d))
+    a, b = list_nodes(1, 2)
+    assert has_order(remove_nth(a, 2), (b,))
+    a, b = list_nodes(1, 2)
+    assert has_order(remove_nth(a, 1), (a,))
+    return remove_nth(a, 1) is None
+
+def check_randomized_set():
+    values = RandomizedSet()
+    assert values.insert(7) and values.insert(4) and values.insert(9)
+    assert not values.insert(4) and not values.remove(0)
+    assert values.remove(4)
+    assert values.values == [7, 9] and values.positions == {7: 0, 9: 1}
+    assert values.remove(9) and values.get_random() == 7
+    return values.remove(7) and not values.values and not values.positions
+
+def check_maximum_product():
+    assert maximum_product([2, -3, -2, 0, 4]) == 12
+    for size in range(1, 5):
+        for values in product(range(-2, 3), repeat=size):
+            expected = max(prod(values[left:right]) for left in range(size)
+                           for right in range(left + 1, size + 1))
+            assert maximum_product(values) == expected, values
+    return True
+
+def check_median():
+    arrays = [values for size in range(4)
+              for values in combinations_with_replacement(range(-2, 3), size)]
+    assert median_sorted([6, 8], [1, 3, 4, 5]) == 4.5
+    return all(median_sorted(a, b) == median(a + b) for a, b in product(arrays, repeat=2)
+               if a or b)
+
+def check_reversed_groups():
+    for size in range(1, 8):
+        for k in range(1, size + 1):
+            nodes = list_nodes(*range(size))
+            groups = [nodes[i:i + k] for i in range(0, size, k)]
+            expected = [node for group in groups
+                        for node in (group[::-1] if len(group) == k else group)]
+            assert has_order(reverse_k_group(nodes[0], k), expected), (size, k)
+    a, b, c, d, e = list_nodes(8, 3, 5, 2, 9)
+    return has_order(reverse_k_group(a, 2), (b, a, d, c, e))
+
+def check_word_search():
+    board = [list("ate"), list("toa")]
+    matches = find_words(board, ["at", "ate", "to", "tea", "tat", "ata"])
+    assert sorted(matches) == ["at", "ate", "tat", "tea", "to"]
+    assert board == [list("ate"), list("toa")]
+    return sorted(find_words([list("aa")], ["a", "aa", "aaa"])) == ["a", "aa"]
+
+def check_split_largest_sum():
+    assert split_largest_sum([4, 2, 6, 3, 5], 2) == 12
+    for size in range(1, 5):
+        for values in product(range(3), repeat=size):
+            for k in range(1, size + 1):
+                def largest(cuts):
+                    boundaries = (0, *cuts, size)
+                    return max(sum(values[a:b]) for a, b in zip(boundaries, boundaries[1:]))
+
+                expected = min(map(largest, combinations(range(1, size), k - 1)))
+                assert split_largest_sum(values, k) == expected, (values, k)
+    return True
 
 def check_btree():
     root = BTreeNode()

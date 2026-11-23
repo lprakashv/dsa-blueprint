@@ -12,9 +12,11 @@ See the [README](README.md) for the project map and deployment steps. See [AGENT
 
 ## Make a change
 
-Keep changes focused. For a new or changed lesson, check its example, complexity, invariant, pitfalls, Python code, diagram states, and practice answer. Lesson data is registered in `site/src/lessons.js`; larger topic-specific lessons live in the `*-lessons.js` files. Reuse `step`, `code`, `quiz`, and existing diagram shapes where they fit. A `challenge` entry adds a hard problem to the picker.
+Keep changes focused. Add a pattern when it applies to several problems. Add related exercises to an existing lesson when it already teaches the technique. Check each changed lesson’s example, complexity, invariant, pitfalls, Python code, diagram states, and practice answer. Register lesson data in `site/src/lessons.js`. Reuse `step`, `code`, `quiz`, and existing diagram shapes.
 
-Add or update tests when behavior changes. Update the README or other affected documentation. For visual or interaction changes, check the affected views in a browser, including keyboard use and a narrow viewport when relevant.
+Use **Misc Problems** for widely practiced hard problems with public evidence of use in major tech interviews. Give each problem a `challenge` entry and a visual solution that explains why the algorithm works. Write original examples and code, and use public problem links.
+
+Add or update tests when behavior changes. Update the README or other affected documentation. For visual changes, use the Designed to Scale palette and pane layout as the reference. Check the affected views in a browser, including light and dark themes, keyboard controls, and a narrow viewport.
 
 Before opening a pull request, run:
 

@@ -4,27 +4,16 @@ An interactive course for learning coding interview patterns. Follow an algorith
 
 [Open the app](https://www.lprakashv.com/dsa-blueprint/) · [Contribute](CONTRIBUTING.md) · [Agent guide](AGENTS.md)
 
-![Two Pointers lesson with its visualization, timeline, and guide](docs/images/learn.jpg)
-
-<details>
-<summary>See the app in three views</summary>
-
-![Animated overview of the lesson, playground, and practice views](docs/images/overview.gif)
-
-</details>
-
 ## Explore the course
 
-- **Learn:** Work through 30 lessons in six modules. Each lesson includes a diagram, a step guide, complexity notes, and a Python implementation.
-- **Practice:** Answer pattern questions or explore five hard problems with examples, hints, and links to LeetCode.
+- **Learn:** Work through 42 lessons in seven modules. Each lesson includes a diagram, a step guide, complexity notes, and a Python implementation.
+- **Practice:** Answer pattern questions or open **Misc Problems** for ten hard problems with examples, hints, and detailed visual solutions.
 - **Playground:** Build traces with your own inputs for Two Pointers, Sliding Window, and Binary Search.
 - **Cheatsheets:** Review pattern signals, complexity, and Python templates.
 
-| Practice a hard problem 🎯 | Build a custom trace 🧪 |
-| --- | --- |
-| ![Minimum Window Substring practice problem](docs/images/practice.jpg) | ![Algorithm playground with editable inputs](docs/images/playground.jpg) |
+On desktop, the course outline sits beside the lesson text and whiteboard. Drag either divider to change the pane width. With a divider focused, use the arrow keys to resize it. On narrow screens, open the outline from the header. The whiteboard appears above the lesson text.
 
-Use the timeline or arrow keys to move between steps. Press Space to play or pause, and R to reset. The app stores completed lessons and the theme in browser local storage. Clearing browser data can remove them.
+Use Back, the step menu, Next, or the arrow keys to move between steps. Press Space to play or pause, R to reset, and / to search. The app stores completed lessons, the theme, and pane widths in browser local storage.
 
 ## Run locally 🚀
 
@@ -56,7 +45,7 @@ Lint checks JavaScript syntax and source whitespace. Tests check lesson data, di
 | `site/index.html`, `site/src/app.js` | App shell, views, and interactions |
 | `site/src/lessons.js`, `*-lessons.js`, `lesson-content.js` | Course data and lesson helpers |
 | `site/src/diagrams.js`, `trace.js` | Diagram rendering and playground algorithms |
-| `site/src/navigation.js`, `icons.js`, `style.css` | Routes, icons, and visual styles |
+| `site/src/navigation.js`, `panes.js`, `style.css` | Routes, pane resizing, and visual styles |
 | `test/` | Node tests and Python example checks |
 | `scripts/` | Static build and lint scripts |
 | `.github/workflows/` | Checks and GitHub Pages deployment |
@@ -91,7 +80,7 @@ For a local production preview, build with `GOOGLE_TAG_ID=GTM-... npm run build`
 
 ## Credits and license
 
-The course outline, central diagram, and step guide take inspiration from [Designed to Scale](https://designed-to-scale.vercel.app/#/). DSA Blueprint has its own lesson content and visual design.
+DSA Blueprint uses the course layout and whiteboard style from [Designed to Scale](https://designed-to-scale.vercel.app/#/). The whiteboard uses the Virgil typeface under the [SIL Open Font License](site/assets/Virgil-LICENSE.md).
 
 The B-tree example uses minimum degree 2. The B+ tree example uses the first key in the right subtree as a separator and shows record keys in the leaves. See [OpenDSA](https://opendsa-server.cs.vt.edu/OpenDSA/Books/CS3/html/BTree.html). The graph lessons include Union-Find and shortest-path algorithms; see [Princeton](https://algs4.cs.princeton.edu/15uf/) and [MIT](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-sma-5503-fall-2005/resources/lecture-videos/).
 

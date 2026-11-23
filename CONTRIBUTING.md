@@ -1,32 +1,44 @@
 # Contributing
 
-Thank you for helping improve DSA Blueprint. Corrections to explanations, examples, accessibility, and code are welcome.
+Corrections to explanations, examples, accessibility, and diagrams are welcome.
 
 ## Start
 
-1. Fork the repository and clone your fork.
-2. Use Node.js 22.12 or later, npm, Python 3, and JDK 17 or later. Run `npm ci` to install the pinned dependencies.
-3. Create a branch for your change and run `npm run dev`. Open http://127.0.0.1:4173/.
+Fork and clone DSA Blueprint. Use Node.js 22.12 or later, npm, Python 3, and JDK 17 or later. Run `npm ci`, then `npm run dev`. Open [the learner preview](http://127.0.0.1:4173/).
 
-See the [README](README.md) for the project map and deployment steps. See [AGENTS.md](AGENTS.md) for design and implementation conventions.
+## Edit in Course Board Studio
 
-## Make a change
+Studio uses the editor dependencies from a Course Board source checkout. The following commands assume that the current directory is the DSA Blueprint root and that the Course Board checkout is next to it. If you already have that checkout at the pinned commit, start with the second command block.
 
-Keep changes focused. Add a pattern when it applies to several problems. Add related exercises to an existing lesson when it already teaches the technique. Check each changed lesson’s example, complexity, invariant, pitfalls, Python and Java code, diagram states, and practice answer. Register lesson data in `site/src/lessons.js`. Reuse `step`, `code`, `quiz`, and existing diagram shapes.
+```sh
+git clone https://github.com/lprakashv/course-board.git ../course-board
+git -C ../course-board checkout --detach 046dd2ca02dfdea90ac7a94d817898096b712c6c
+```
 
-Edit lesson titles, summaries, step titles, and step prose in `content/lessons/<id>.md`. The Course Board manifest in `content/course.json` sets chapter and lesson order. Keep each chapter's name and lesson membership, each lesson ID, and the number and order of steps aligned with the JavaScript data. The JavaScript retains older copies of some text as well as the scene, label, metrics, code, and practice data. Markdown is the source for displayed lesson titles, summaries, step titles, and prose. Change the related JavaScript data together with the Markdown when needed.
+```sh
+npm --prefix ../course-board ci
+node ../course-board/src/cli.js author .
+```
 
-To override a step's diagram, add a Course Board `step` block directly below its heading. ASCII, image, SVG, Excalidraw SVG, sandboxed HTML, and custom renderers are supported. Put file assets in `public/`; the build validates them and publishes them under `media/`. For a custom renderer, set `extension` in the manifest to a module in `public/` that exports a `diagrams` map. Extensions are trusted code. The built-in `dsa-scene` renderer is reserved. The app shows the diagram's caption and an Excalidraw source download when supplied. An authored diagram replaces the existing scene and its metrics and legend for that step. Steps without a diagram retain the existing scene and animation. See the [Course Board authoring guide](https://github.com/lprakashv/course-board/blob/v0.1.2/docs/authoring.md#5-choose-a-diagram-type).
+Open [Course Board Studio](http://127.0.0.1:4175/). Select a lesson and edit the Markdown or attach a board. Select **Save course**, then reload the learner preview. Stop Studio with Ctrl+C. [Course Board authoring guide](https://github.com/lprakashv/course-board/blob/046dd2ca02dfdea90ac7a94d817898096b712c6c/docs/authoring.md)
 
-Run `npm run setup:course-board` after content or asset edits, or restart `npm run dev`, to compile the Markdown and copy assets before previewing them.
+## Edit source files or import a bundle
 
-The production build calls Course Board's site builder with the DSA custom shell in `scripts/course-shell.js`. The shell writes the existing interface and the validated course model to the build directory. Course Board's browser entry point starts `site/src/app.js` as its adapter. The adapter uses the shared shell lifecycle and storage helpers. Keep routes and the `pattern-studio-v1` storage format compatible when changing the interface.
+- Set chapter and lesson order in `content/course.json`. Each lesson ID maps to `content/lessons/<id>.md`.
+- Use `##` for step titles and `###` or lower for headings within a step. Put a fenced `step` block immediately below the title to set a named ID, attach a diagram, or reference a snippet. Keep lesson IDs and the order of published numbered steps stable. Keep named step IDs stable when you reorder steps.
+- Keep the example, complexity, invariant, common error, metrics, and practice answer consistent. Include a question, a separate answer, and related exercises. For a challenge, also include a problem statement, example, constraints, hints, and a public judge link.
+- Put example files in `content/snippets/`. Set `snippet.src` relative to that directory and set `snippet.language` to `python` or `java`. Edit the file directly to update its content. Reflect new examples in `test/python.test.js` and `test/java.test.js`.
+- Put board files under `public/` and set `diagram.src` relative to it. Write descriptive alternative text. Edit a migrated HTML board as a static file or replace it with a board attachment in Studio. To draw a new board, use Studio's Excalidraw editor. The learner renders attachments with Course Board's diagram types.
+- Change theme colors in `public/theme.css`. Review both device color schemes. Keep the interface accessible by keyboard and check a narrow screen.
 
-Use **Misc Problems** for widely practiced hard problems with public evidence of use in major tech interviews. Give each problem a `challenge` entry and a visual solution that explains why the algorithm works. Write original examples and code, and use public problem links.
+For bulk import, prepare a JSON bundle with a manifest, lessons, and optional maps from project destinations to source files. The bundle supplies the course outline. Course Board checks the result before it updates source files. The imported Markdown and assets are the editable source after import. [Bundle schema](https://github.com/lprakashv/course-board/blob/046dd2ca02dfdea90ac7a94d817898096b712c6c/schemas/ingest.json)
 
-Add or update tests when behavior changes. Update the README or other affected documentation. For visual changes, use the Designed to Scale palette and pane layout as the reference. Check the affected views in a browser, including light and dark themes, keyboard controls, and a narrow viewport.
+```sh
+npm run ingest -- /path/to/course-bundle.json
+npm run lint
+```
 
-Before opening a pull request, run:
+## Check a change
 
 ```sh
 npm run lint
@@ -35,10 +47,8 @@ npm run coverage
 npm run build
 ```
 
-For a production preview, run `npm run run` after the build and open http://127.0.0.1:4174/. Stop either local server with Ctrl+C.
+Lint runs the Course Board content validator. The tests check links, the stock learner build, and all Python and Java examples. Coverage runs the Node tests with coverage reporting. Browser behavior belongs to Course Board and is checked separately.
 
-## Open a pull request
-
-Describe the problem, the change, and the checks you ran. Link a related issue if there is one. Include screenshots or a short recording for visible changes. Note any limits or follow-up work. The GitHub Actions workflow runs the checks and build for pull requests to `main`.
+Run `npm run run` and open [the production preview](http://127.0.0.1:4174/). Check the affected steps, direct links, and keyboard controls. Update the README or other affected docs. See the [agent guide](AGENTS.md) for project conventions.
 
 By contributing, you agree that your contribution is licensed under the [MIT License](LICENSE).

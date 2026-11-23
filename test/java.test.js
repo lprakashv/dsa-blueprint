@@ -4,8 +4,10 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
-import { lessons } from '../site/src/lessons.js'
-import { javaSolutions } from '../site/src/java-solutions.js'
+import { compileCourse } from '@lprakashv/course-board'
+
+const { chapters } = await compileCourse('.')
+const lessons = chapters.flatMap(chapter => chapter.lessons).filter(lesson => lesson.id !== 'pattern-cheatsheets')
 
 const checks = {
   'two-pointers': 'Arrays.equals(S.pairSum(new int[]{1,2,4,6,8,12},10), new int[]{1,4}) && S.pairSum(new int[]{1,2},5) == null',
@@ -69,12 +71,14 @@ const helpers = {
 }
 
 test('Java implementations compile and solve each lesson example', () => {
-  assert.deepEqual(Object.keys(javaSolutions).sort(), lessons.map(lesson => lesson.id).sort())
   assert.deepEqual(Object.keys(checks).sort(), lessons.map(lesson => lesson.id).sort())
+  // Compile all examples once. Nest each case so repeated Solution and helper names stay isolated.
   const source = ['import java.util.*;', 'class JavaExamples {']
   lessons.forEach((lesson, i) => {
     source.push(`static class Case${i} {`)
-    source.push(lesson.java.replace('import java.util.*;\n\nclass Solution {', 'static class S {'))
+    const java = lesson.steps.find(step => step.snippet?.language === 'java')
+    assert.ok(java?.snippet.text, `Missing Java source for ${lesson.id}`)
+    source.push(java.snippet.text.replace('import java.util.*;\n\nclass Solution {', 'static class S {'))
     source.push(helpers[lesson.id] ?? '')
     source.push(`static void check() { if (!(${checks[lesson.id]})) throw new AssertionError("${lesson.id}"); }`, '}')
   })

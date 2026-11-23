@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add the first window</title>
+  <link rel="stylesheet" href="../whiteboard.css">
+</head>
+<body>
+  <main>
+    <div class="array-diagram" style="--count:6">
+    <div class="array-label"><span>INDEX</span><span>VALUE</span></div>
+    <div class="array-cells"><div class="array-slot">
+      <span class="array-index">0</span>
+      <span class="array-cell is-active">2</span>
+      <div class="marker"></div>
+    </div><div class="array-slot">
+      <span class="array-index">1</span>
+      <span class="array-cell is-active">1</span>
+      <div class="marker"></div>
+    </div><div class="array-slot">
+      <span class="array-index">2</span>
+      <span class="array-cell is-active">5</span>
+      <div class="marker"></div>
+    </div><div class="array-slot">
+      <span class="array-index">3</span>
+      <span class="array-cell is-muted">1</span>
+      <div class="marker"></div>
+    </div><div class="array-slot">
+      <span class="array-index">4</span>
+      <span class="array-cell is-muted">3</span>
+      <div class="marker"></div>
+    </div><div class="array-slot">
+      <span class="array-index">5</span>
+      <span class="array-cell is-muted">2</span>
+      <div class="marker"></div>
+    </div><i class="window-bracket"
+      style="--window-start:0;--window-width:3" aria-hidden="true"></i></div>
+    <p class="scene-note">Window sum = 8</p>
+  </div>
+    <ul class="legend" aria-label="Whiteboard legend"><li><span class="legend-dot purple" aria-hidden="true"></span>Current window</li><li><span class="legend-dot teal" aria-hidden="true"></span>Best window</li></ul>
+  </main>
+</body>
+</html>

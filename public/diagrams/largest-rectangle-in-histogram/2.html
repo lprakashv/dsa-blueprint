@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Close the first rectangle</title>
+  <link rel="stylesheet" href="../whiteboard.css">
+</head>
+<body>
+  <main>
+    <div class="histogram-diagram" style="--bar-count:5">
+    <div class="histogram-plot" role="img" aria-label="Bar heights: 2, 1, 4, 5, 2. Stack indices: 1. Height 2 × width 1 = 2">
+      <div class="histogram-bar"
+        style="--bar-height:40%"><span>2</span></div><div class="histogram-bar is-stacked is-active"
+        style="--bar-height:20%"><span>1</span></div><div class="histogram-bar"
+        style="--bar-height:80%"><span>4</span></div><div class="histogram-bar"
+        style="--bar-height:100%"><span>5</span></div><div class="histogram-bar"
+        style="--bar-height:40%"><span>2</span></div>
+      <div class="histogram-rectangle is-match" style="--left-bar:1;--after-bar:2;--bar-height:40%"></div>
+    </div>
+    <div class="histogram-indices" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div>
+    <p class="scene-note">Height 2 × width 1 = 2</p>
+  </div>
+    <ul class="legend" aria-label="Whiteboard legend"><li><span class="legend-dot purple" aria-hidden="true"></span>Current or stacked bar</li><li><span class="legend-dot teal" aria-hidden="true"></span>Candidate rectangle</li><li><span class="legend-dot gray" aria-hidden="true"></span>Other bar</li></ul>
+  </main>
+</body>
+</html>

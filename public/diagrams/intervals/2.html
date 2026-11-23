@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Combine the first overlap</title>
+  <link rel="stylesheet" href="../whiteboard.css">
+</head>
+<body>
+  <main>
+    <div class="interval-diagram">
+    <div class="interval-axis"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div>
+    <div class="interval-group"><span class="lane-label">Sorted</span>
+      <div class="interval-tracks"><div class="interval-track">
+        <span class="interval-bar is-active" style="--start:0%;--length:18.181818181818183%">1–3</span>
+      </div><div class="interval-track">
+        <span class="interval-bar is-active" style="--start:9.090909090909092%;--length:36.36363636363637%">2–6</span>
+      </div><div class="interval-track">
+        <span class="interval-bar" style="--start:63.63636363636363%;--length:18.181818181818183%">8–10</span>
+      </div><div class="interval-track">
+        <span class="interval-bar" style="--start:72.72727272727273%;--length:27.27272727272727%">9–12</span>
+      </div></div></div><div class="interval-group"><span class="lane-label">Output</span>
+      <div class="interval-tracks"><div class="interval-track">
+        <span class="interval-bar is-active" style="--start:0%;--length:45.45454545454545%">1–6</span>
+      </div></div></div>
+    <p class="scene-note">Overlap · extend to 6</p>
+  </div>
+    <ul class="legend" aria-label="Whiteboard legend"><li><span class="legend-dot purple" aria-hidden="true"></span>Selected range</li><li><span class="legend-dot gray" aria-hidden="true"></span>Other range</li></ul>
+  </main>
+</body>
+</html>

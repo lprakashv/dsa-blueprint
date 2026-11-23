@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search from each cell that can begin a word</title>
+  <link rel="stylesheet" href="../whiteboard.css">
+</head>
+<body>
+  <main>
+    <div class="matrix-diagram"><table aria-label="Found: at, ate, tat, tea, to">
+    <thead><tr><td></td><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th></tr></thead>
+    <tbody><tr><th scope="row">0</th><td><span class="array-cell ">
+        a</span></td><td><span class="array-cell ">
+        t</span></td><td><span class="array-cell ">
+        e</span></td></tr><tr><th scope="row">1</th><td><span class="array-cell is-match">
+        t<span class="sr-only">, Cells in current path</span></span></td><td><span class="array-cell is-active">
+        o<span class="sr-only">, Current cell</span></span></td><td><span class="array-cell ">
+        a</span></td></tr></tbody>
+  </table><p class="scene-note">Found: at, ate, tat, tea, to</p></div>
+    <ul class="legend" aria-label="Whiteboard legend"><li><span class="legend-dot purple" aria-hidden="true"></span>Current cell</li><li><span class="legend-dot teal" aria-hidden="true"></span>Cells in current path</li><li><span class="legend-dot gray" aria-hidden="true"></span>Other cells</li></ul>
+  </main>
+</body>
+</html>

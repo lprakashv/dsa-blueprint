@@ -1,7 +1,4 @@
 node_modules/
-site/src/vendor/
-site/src/generated/
-site/media/
 dist/
 .DS_Store
 showcase/

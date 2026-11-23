@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fill the matrix from direct edges</title>
+  <link rel="stylesheet" href="../whiteboard.css">
+</head>
+<body>
+  <main>
+    <div class="matrix-diagram"><table aria-label="Rows are sources · columns are destinations">
+    <thead><tr><td></td><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th></tr></thead>
+    <tbody><tr><th scope="row">A</th><td><span class="array-cell ">
+        0</span></td><td><span class="array-cell is-active">
+        3<span class="sr-only">, Current cell</span></span></td><td><span class="array-cell is-active">
+        10<span class="sr-only">, Current cell</span></span></td></tr><tr><th scope="row">B</th><td><span class="array-cell ">
+        ∞</span></td><td><span class="array-cell ">
+        0</span></td><td><span class="array-cell is-active">
+        2<span class="sr-only">, Current cell</span></span></td></tr><tr><th scope="row">C</th><td><span class="array-cell ">
+        ∞</span></td><td><span class="array-cell ">
+        ∞</span></td><td><span class="array-cell ">
+        0</span></td></tr></tbody>
+  </table><p class="scene-note">Rows are sources · columns are destinations</p></div>
+    <ul class="legend" aria-label="Whiteboard legend"><li><span class="legend-dot purple" aria-hidden="true"></span>Current cells</li><li><span class="legend-dot teal" aria-hidden="true"></span>Processed cells</li><li><span class="legend-dot gray" aria-hidden="true"></span>Other cells</li></ul>
+  </main>
+</body>
+</html>

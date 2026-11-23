@@ -2,6 +2,7 @@
   "version": 1,
   "id": "dsa-blueprint",
   "title": "DSA Blueprint",
+  "theme": "theme.css",
   "chapters": [
     {
       "title": "Arrays & Strings",
@@ -79,6 +80,13 @@
         "word-search-ii",
         "split-array-largest-sum"
       ]
+    },
+    {
+      "title": "Reference",
+      "lessons": [
+        "pattern-cheatsheets"
+      ]
     }
-  ]
+  ],
+  "description": "Learn coding interview patterns with step-by-step whiteboards, Python and Java examples, and practice questions."
 }

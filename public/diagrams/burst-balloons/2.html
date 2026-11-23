@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Split the interval at the last balloon</title>
+  <link rel="stylesheet" href="../whiteboard.css">
+</head>
+<body>
+  <main>
+    <div class="array-diagram" style="--count:5">
+    <div class="array-label"><span>INDEX</span><span>VALUE</span></div>
+    <div class="array-cells"><div class="array-slot">
+      <span class="array-index">0</span>
+      <span class="array-cell is-active">1</span>
+      <div class="marker"><span class="marker-tag">L</span></div>
+    </div><div class="array-slot">
+      <span class="array-index">1</span>
+      <span class="array-cell">2</span>
+      <div class="marker"></div>
+    </div><div class="array-slot">
+      <span class="array-index">2</span>
+      <span class="array-cell">4</span>
+      <div class="marker"></div>
+    </div><div class="array-slot">
+      <span class="array-index">3</span>
+      <span class="array-cell is-active is-match">3</span>
+      <div class="marker"><span class="marker-tag">LAST</span></div>
+    </div><div class="array-slot">
+      <span class="array-index">4</span>
+      <span class="array-cell is-active is-right">1</span>
+      <div class="marker"><span class="marker-tag is-right">R</span></div>
+    </div></div>
+    <p class="scene-note">Final gain: 1 × 3 × 1 = 3</p>
+  </div>
+    <ul class="legend" aria-label="Whiteboard legend"><li><span class="legend-dot purple" aria-hidden="true"></span>Left pointer</li><li><span class="legend-dot teal" aria-hidden="true"></span>Right pointer</li><li><span class="legend-dot gray" aria-hidden="true"></span>Array element</li></ul>
+  </main>
+</body>
+</html>

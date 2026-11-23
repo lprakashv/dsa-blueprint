@@ -1,0 +1,205 @@
+@import url("../fonts/virgil.css");
+
+:root {
+  color-scheme: light;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.5;
+  --bg: #eef2f6;
+  --panel: #fff;
+  --card: #f6f8fb;
+  --ink: #192735;
+  --body: #34485b;
+  --muted: #475a6e;
+  --border: #d1dae4;
+  --border-strong: #a8b7c6;
+  --callout-stroke: #7194bd;
+  --purple: #5140a0;
+  --purple-soft: #e9e6ff;
+  --purple-line: #8879be;
+  --teal: #216342;
+  --teal-soft: #d9f4e6;
+  --teal-line: #73a58b;
+  --canvas: var(--card);
+  --cell: var(--panel);
+  --mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  color: var(--ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #121a23;
+    --panel: #1b2733;
+    --card: #202e3b;
+    --ink: #e7eff7;
+    --body: #c7d7e7;
+    --muted: #b1c4d7;
+    --border: #435467;
+    --border-strong: #72869a;
+    --callout-stroke: #88aad1;
+    --purple: #c3b6ff;
+    --purple-soft: #37305c;
+    --purple-line: #a397d6;
+    --teal: #a2e3bd;
+    --teal-soft: #204338;
+    --teal-line: #81bc9b;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { display: grid; min-height: 100vh; align-content: center; justify-items: center; gap: .625rem; padding: .5rem; }
+p { margin: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+.legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: 0; padding: 0; justify-content: center; list-style: none; color: var(--muted); font-size: .8125rem; }
+.legend li { display: inline-flex; align-items: center; gap: .375rem; }
+.legend-dot { width: .7rem; height: .55rem; border: 1px solid var(--muted); border-radius: 2px; }
+.legend-dot.purple { border-width: 2px; background: var(--purple-soft); border-color: var(--purple-line); }
+.legend-dot.teal { border-style: dashed; background: var(--teal-soft); border-color: var(--teal-line); }
+/* Array geometry comes from the scene. The same cells appear in other board types. */
+.array-diagram { width: min(100%, calc(60px * var(--count) + 53px)); position: relative; padding-left: 40px; }
+.array-label {
+  display: grid; grid-template-rows: 18px 1fr; align-items: center; position: absolute;
+  top: 0; bottom: 60px; left: 0; color: var(--muted); font: 700 8px var(--mono); letter-spacing: .08em;
+}
+.array-cells {
+  --gap: clamp(3px, .75vw, 9px); position: relative; display: grid;
+  grid-template-columns: repeat(var(--count), minmax(0, 1fr)); gap: var(--gap);
+}
+.window-bracket {
+  --column: calc((100% + var(--gap)) / var(--count)); position: absolute; bottom: 12px;
+  left: calc(var(--column) * var(--window-start)); width: calc(var(--column) * var(--window-width) - var(--gap));
+  height: 8px; border: 2px solid var(--purple-line); border-top: 0; border-radius: 0 0 6px 6px; pointer-events: none;
+}
+.window-bracket.is-match { border-style: dashed; border-top: 0; border-color: var(--teal-line); }
+.array-slot { display: grid; justify-items: center; grid-template-rows: 18px auto 31px; min-width: 0; }
+.array-index { color: var(--muted); font: 500 10px var(--mono); }
+.array-cell {
+  display: grid; place-items: center; width: 100%; min-width: 0; height: clamp(36px, 4vw, 55px);
+  border-radius: .3rem; border: 1px solid var(--border-strong); background: var(--cell);
+  color: var(--ink); font: clamp(14px, 2vw, 25px) Virgil, var(--mono);
+}
+.array-cell.is-active {
+  border: 2px solid var(--purple-line); background: var(--purple-soft); color: var(--purple);
+}
+.array-cell.is-right, .array-cell.is-match {
+  border: 1px dashed var(--teal-line); background: var(--teal-soft); color: var(--teal);
+}
+.array-cell.is-muted { background: color-mix(in srgb, var(--canvas) 75%, var(--panel)); color: var(--muted); box-shadow: none; }
+.marker { position: relative; padding-top: 12px; }
+.marker-tag {
+  display: block; position: relative; padding: 3px 6px; border: 1px solid var(--purple-line); border-radius: 5px;
+  background: var(--purple-soft); color: var(--purple); font: 750 10px var(--mono); white-space: nowrap;
+}
+.marker-tag::before {
+  content: ''; position: absolute; bottom: calc(100% - 1px); left: calc(50% - 3px); width: 6px; height: 6px;
+  border: 1px solid var(--purple-line); border-right: 0; border-bottom: 0; transform: translateY(-1px) rotate(45deg); background: inherit;
+}
+.marker-tag.is-right { color: var(--teal); background: var(--teal-soft); border-color: var(--teal-line); }
+.marker-tag.is-right::before { border-color: var(--teal-line); }
+.scene-note {
+  padding: .5rem .625rem; color: var(--body); font-size: .875rem;
+  background: var(--panel); border-inline-start: .25rem solid var(--callout-stroke); border-radius: .375rem;
+}
+.lane-diagram { display: grid; gap: 11px; width: min(100%, 455px); }
+.lane { display: flex; align-items: center; gap: 8px; }
+.lane-label { flex: 0 0 64px; color: var(--muted); font: 700 9px/1.1 var(--mono); text-transform: uppercase; }
+.lane-cells { display: flex; gap: 6px; flex-wrap: wrap; }
+.lane-cells .array-cell { width: auto; min-width: 37px; height: 39px; padding: 0 6px; font-size: clamp(12px, 1.3vw, 17px); border-radius: 8px; }
+.empty-cell { display: grid; place-items: center; min-height: 35px; padding: 0 10px; border: 1px dashed var(--border-strong); border-radius: 7px; color: var(--muted); font: 11px var(--mono); }
+/* The SVG defines graph geometry. These rules distinguish node and edge states. */
+.graph-diagram { width: min(100%, 360px); text-align: center; }
+.graph-diagram svg { width: min(100%, 340px); height: 186px; }
+.graph-diagram.pages, .graph-diagram.weighted, .graph-diagram.forest { width: min(100%, 425px); }
+.graph-diagram.pages svg, .graph-diagram.weighted svg, .graph-diagram.forest svg { width: 100%; }
+.graph-edge { --edge-color: var(--purple-line); }
+.graph-edge line { stroke: var(--edge-color); stroke-width: 2px; }
+.graph-edge.is-active { --edge-color: var(--purple); }
+.graph-edge.is-active line { stroke-width: 2.8px; }
+.graph-edge.is-link line { stroke-dasharray: 5 4; }
+#graph-arrow path { fill: var(--purple); }
+.edge-weight rect { fill: var(--panel); stroke: var(--border-strong); }
+.edge-weight text { fill: var(--ink); font: 650 11px var(--mono); }
+.graph-node rect { fill: var(--cell); stroke: var(--border-strong); stroke-width: 1.4px; }
+.graph-node text { fill: var(--ink); font: 14px Virgil, var(--mono); white-space: pre; }
+.graph-node .graph-value { fill: var(--muted); font: 12px var(--mono); }
+.graph-node.is-visited rect { stroke-dasharray: 4 2; fill: var(--teal-soft); stroke: var(--teal-line); }
+.graph-node.is-active rect { stroke-dasharray: none; fill: var(--purple-soft); stroke: var(--purple-line); stroke-width: 2.5px; }
+.graph-node.is-active .graph-value { fill: var(--purple); }
+
+.matrix-diagram { width: fit-content; max-width: 100%; }
+.matrix-diagram table { margin-inline: auto; border-collapse: separate; border-spacing: 5px; }
+.matrix-diagram th { color: var(--muted); font: 650 10px var(--mono); min-width: 12px; }
+.matrix-diagram td { padding: 0; }
+.matrix-diagram .array-cell {
+  width: clamp(31px, 5vw, 48px); height: clamp(27px, 4vw, 38px);
+  border-radius: 7px; font-size: clamp(12px, 1.9vw, 17px); box-shadow: 0 2px 0 var(--border-strong);
+}
+.matrix-diagram .is-active { box-shadow: 0 2px 0 var(--purple-line); }
+.matrix-diagram .is-match { box-shadow: 0 2px 0 var(--teal-line); }
+.matrix-diagram .matrix-blocked {
+  background: repeating-linear-gradient(135deg, var(--bg) 0 4px, var(--border) 4px 6px);
+  color: var(--muted); box-shadow: none;
+}
+
+.histogram-diagram { width: min(100%, 356px); }
+.histogram-plot, .histogram-indices {
+  display: grid; grid-template-columns: repeat(var(--bar-count), minmax(0, 1fr)); gap: 6px;
+}
+.histogram-plot {
+  position: relative; align-items: end; height: 145px; margin-top: 14px;
+  border-bottom: 1px solid var(--border-strong);
+  background: repeating-linear-gradient(to top, transparent 0 calc(20% - 1px), var(--border) calc(20% - 1px) 20%);
+}
+.histogram-bar {
+  position: relative; height: var(--bar-height); min-height: 1px; border: 1px solid var(--border-strong); border-bottom: 0;
+  border-radius: 6px 6px 0 0; background: var(--panel);
+}
+.histogram-bar.is-stacked { border-width: 2px; color: var(--purple); background: var(--purple-soft); border-color: var(--purple-line); }
+.histogram-bar.is-active { color: var(--purple); background: var(--purple-line); border-color: var(--purple); }
+.histogram-bar span, .histogram-indices span { text-align: center; font: 650 11px var(--mono); }
+.histogram-bar span { position: absolute; inset-inline: 0; bottom: calc(100% + 4px); }
+.histogram-indices { margin-top: 6px; color: var(--muted); }
+.histogram-rectangle {
+  grid-column: var(--left-bar) / var(--after-bar); position: absolute; inset-inline: 0; bottom: 0; height: var(--bar-height);
+  background: color-mix(in srgb, var(--teal-soft) 72%, transparent); border: 2px dashed var(--teal); border-bottom: 0;
+  border-radius: 5px 5px 0 0; pointer-events: none;
+}
+.stack-diagram { display: flex; gap: clamp(12px, 4vw, 44px); align-items: flex-start; }
+.stack-input, .stack-output { display: grid; gap: 10px; }
+/* Show the top of the stack above earlier values. */
+.stack-box { display: flex; flex-direction: column-reverse; justify-content: flex-start; min-height: 108px; gap: 6px; border: 2px dashed var(--border-strong); border-top: 0; padding: 6px; border-radius: 0 0 10px 10px; }
+.stack-box .array-cell { min-width: 54px; height: 39px; font-size: 18px; }
+.link-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.link-item { display: grid; min-width: 40px; gap: 9px; text-align: center; }
+.link-target { color: var(--muted); font: 650 11px var(--mono); }
+
+/* Position all interval bars against one numeric axis. */
+.interval-diagram { width: min(100%, 440px); --axis-label: 55px; padding-right: 7px; }
+.interval-axis {
+  display: flex; justify-content: space-between; margin: 0 -5px 5px calc(var(--axis-label) - 5px);
+  color: var(--muted); font: 9px var(--mono);
+}
+.interval-axis span { width: 10px; text-align: center; }
+.interval-group { display: grid; grid-template-columns: var(--axis-label) minmax(0, 1fr); margin-bottom: 4px; align-items: center; }
+.interval-track { height: 23px; position: relative; border-bottom: 1px solid color-mix(in srgb, var(--purple-line) 52%, transparent); }
+.interval-bar {
+  position: absolute; left: var(--start); width: var(--length); min-width: 21px; top: 2px; bottom: 2px;
+  display: grid; place-items: center; border-radius: 5px; border: 1px solid var(--border-strong); background: var(--cell);
+  font: 650 9px var(--mono); color: var(--body); white-space: nowrap;
+}
+.interval-bar.is-active { border-width: 2px; color: var(--purple); background: var(--purple-soft); border-color: var(--purple-line); }
+.interval-tracks > .empty-cell { min-height: 24px; }
+
+@media (max-width: 26rem) {
+  .array-diagram { padding-left: 0; }
+  .array-label { display: none; }
+  .array-cells { --gap: 3px; }
+  .array-diagram:has(.array-slot:nth-child(8)) .array-cell { font-size: .625rem; }
+  .marker-tag { font-size: 9px; padding-inline: 3px; }
+  .lane-label { flex-basis: 43px; }
+  .lane-cells .array-cell { min-width: 27px; padding-inline: 4px; }
+  .matrix-diagram table { border-spacing: 3px; }
+  .matrix-diagram .array-cell { width: 25px; }
+}

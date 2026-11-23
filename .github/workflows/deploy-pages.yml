@@ -28,11 +28,10 @@ jobs:
       - run: npm run coverage
       - name: Build site
         run: npm run build
-        env:
-          GOOGLE_TAG_ID: ${{ vars.GOOGLE_TAG_ID }}
+      # Capture the production output so the screenshot matches the deploy artifact.
       - name: Capture README screenshot
         run: |
-          python3 -m http.server 4174 --bind 127.0.0.1 --directory dist > /tmp/dsa-blueprint-server.log 2>&1 &
+          ./node_modules/.bin/course-board preview > /tmp/dsa-blueprint-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           for attempt in {1..30}; do
@@ -49,6 +48,7 @@ jobs:
         with:
           path: dist
 
+  # Pull requests run the build job. Deployment requires a push or manual run.
   deploy:
     if: github.event_name != 'pull_request'
     needs: build

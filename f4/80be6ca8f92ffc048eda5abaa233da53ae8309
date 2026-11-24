@@ -1,0 +1,27 @@
+docs/course-board-review.md
+  s_1b53b60582e37f::t_22e31142a93eae 3
+CONTRIBUTING.md
+  s_1b53b60582e37f::t_22e31142a93eae 15,23,34
+README.md
+  s_1b53b60582e37f::t_22e31142a93eae 33,61
+package.json
+  s_1b53b60582e37f::t_22e31142a93eae 19
+package-lock.json
+  s_1b53b60582e37f::t_0326a7b0e6ca6b 11,18-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f480be6ca8f92ffc048eda5abaa233da53ae8309",
+  "prompts": {},
+  "sessions": {
+    "s_1b53b60582e37f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20c6b-1369-7250-899b-7a1a17fee16f",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

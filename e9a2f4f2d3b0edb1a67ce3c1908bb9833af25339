@@ -1,0 +1,36 @@
+CONTRIBUTING.md
+  s_db6e6baa1cb45d::t_f5e70221d318d3 8,15
+site/src/java-solutions.js
+  s_db6e6baa1cb45d::t_3c6ddf23012adc 278-281,284,286-296,562-565,568,570-580
+  s_db6e6baa1cb45d::t_ea5f51f70f5e6b 299,583
+  s_db6e6baa1cb45d::t_ea686390b3668a 91,451-537,539-561,566-567,569,581,584-646
+  s_db6e6baa1cb45d::t_e134d24a93d3de 274-277,282-283,285,297-298,300-450,538,582
+  s_db6e6baa1cb45d::t_0c81777aa3d440 1-90,92-273
+site/src/app.js
+  s_db6e6baa1cb45d::t_f5e70221d318d3 217-219,327
+test/java.test.js
+  s_db6e6baa1cb45d::t_e4dd72e3871df5 1-94
+README.md
+  s_db6e6baa1cb45d::t_f5e70221d318d3 9,12,22,41
+  s_db6e6baa1cb45d::t_3c6ddf23012adc 18-19
+.github/workflows/deploy-pages.yml
+  s_db6e6baa1cb45d::t_3c6ddf23012adc 21-24
+site/src/lessons.js
+  s_db6e6baa1cb45d::t_f5e70221d318d3 2,437
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e9a2f4f2d3b0edb1a67ce3c1908bb9833af25339",
+  "prompts": {},
+  "sessions": {
+    "s_db6e6baa1cb45d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20782-8f04-72a2-be83-991135065985",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

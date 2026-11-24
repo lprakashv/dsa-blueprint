@@ -1,0 +1,180 @@
+package.json
+  s_8b2c18a773b565::t_de0fcf1b865892 16
+  s_8b2c18a773b565::t_68615a653e1877 6-8,22-23
+  s_8b2c18a773b565::t_c787c67bcaa7b1 15,17-21
+  s_8b2c18a773b565::t_b4f39b7bd0885c 24
+content/lessons/reverse-nodes-in-k-group.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/spiral-matrix.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+README.md
+  s_8b2c18a773b565::t_f78839d20cb8c1 64
+  s_8b2c18a773b565::t_1f11a3bc55491f 55
+  s_8b82e73be00b0e::t_55c12e009173cc 7-8,80
+  s_8b2c18a773b565::t_c586b1dbac7d64 61,63,65
+  s_8b2c18a773b565::t_89186386185c59 24,29,54
+  s_8b2c18a773b565::t_ff4185712891ba 52,62
+  s_8b2c18a773b565::t_67d9c914d929bb 66,81
+content/lessons/binary-search-on-answer.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/intervals.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/topological-sort.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/dynamic-programming.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+scripts/compile-course.js
+  s_8b2c18a773b565::t_5c4aee45382809 2-6,14
+  s_8b2c18a773b565::t_a6ce58d18aaccb 1,7-12
+  s_8b2c18a773b565::t_ff4185712891ba 13
+CONTRIBUTING.md
+  s_8b2c18a773b565::t_1f11a3bc55491f 24
+  s_8b2c18a773b565::t_c586b1dbac7d64 17-21
+  s_8b2c18a773b565::t_89186386185c59 8
+  s_8b2c18a773b565::t_ff4185712891ba 22
+  s_8b2c18a773b565::t_f78839d20cb8c1 23
+content/lessons/bfs.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/largest-rectangle-in-histogram.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/dijkstra.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+site/src/style.css
+  s_8b2c18a773b565::t_a6ce58d18aaccb 236-238
+content/lessons/matrix-prefix-sum.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+scripts/course-shell.js
+  s_8b2c18a773b565::t_bf6cfdbd2c1f24 1-21
+content/lessons/two-pointers.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/bellman-ford.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/linked-list.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/prefix-sum-hash-map.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+.github/workflows/deploy-pages.yml
+  s_8b2c18a773b565::t_89186386185c59 25
+  s_8b82e73be00b0e::t_55c12e009173cc 33-46
+content/lessons/grid-obstacle-elimination.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/heap.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/stack.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/burst-balloons.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+site/index.html
+  s_8b2c18a773b565::t_7f7fbb118241df 16
+content/lessons/binary-search.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/knapsack-01.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/median-of-two-sorted-arrays.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-9,11-24
+  s_8b2c18a773b565::t_a2a6ddd8e6393a 10
+site/src/course-board.js
+  s_8b2c18a773b565::t_a6ce58d18aaccb 4,6-7
+  s_8b2c18a773b565::t_89186386185c59 1-3,5,8-9
+test/traces.test.js
+  s_8b2c18a773b565::t_89186386185c59 4-11
+content/lessons/split-array-largest-sum.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/backtracking.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+site/src/lessons.js
+  s_8b2c18a773b565::t_5c4aee45382809 10,437-438,441-445,450-461,463-468
+  s_8b2c18a773b565::t_a6ce58d18aaccb 462
+  s_8b2c18a773b565::t_ff4185712891ba 439-440,446-449
+  s_8b2c18a773b565::t_ce6df8fb6c8747 469
+content/lessons/array-index-map.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+test/build.test.js
+  s_8b2c18a773b565::t_7f7fbb118241df 25-26
+  s_8b2c18a773b565::t_ffd40eac40f5d1 1,4-6,9-24,27-31,54
+  s_8b2c18a773b565::t_e2fe5f7022c81d 2-3,7,32-53
+  s_8b2c18a773b565::t_1f11a3bc55491f 8
+site/src/app.js
+  s_8b2c18a773b565::t_89186386185c59 2-3
+  s_8b2c18a773b565::t_7f7fbb118241df 9,21,23,27,42,482,640-643
+  s_8b2c18a773b565::t_a6ce58d18aaccb 10-13,351-356,358-373
+  s_8b2c18a773b565::t_04ccefb1d07b7c 89,190,270,317,342
+  s_8b2c18a773b565::t_5c4aee45382809 164,197
+  s_8b2c18a773b565::t_a6188e794bd481 381-382,384
+content/lessons/floyd-warshall.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/word-ladder.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+test/course.test.js
+  s_8b2c18a773b565::t_89186386185c59 5,61
+  s_8b2c18a773b565::t_ff4185712891ba 8-21
+  s_8b2c18a773b565::t_a61743d3a5d29f 23-37
+  s_8b2c18a773b565::t_1db63fffa2e247 22
+content/lessons/prefix-sum.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/b-tree.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/tree-postorder.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/word-search-ii.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+scripts/build.js
+  s_8b2c18a773b565::t_bf6cfdbd2c1f24 1-2,4
+.gitignore
+  s_8b2c18a773b565::t_89186386185c59 2
+  s_8b2c18a773b565::t_5c4aee45382809 3
+  s_8b2c18a773b565::t_a6ce58d18aaccb 4
+content/lessons/grid-bfs.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/dfs.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/course.json
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-84
+content/lessons/grid-dfs.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/minimum-window-substring.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/dp-min-max.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/linked-list-gap.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/sliding-window.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/hash-map.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/greedy.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+content/lessons/binary-tree-maximum-path-sum.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-9,11-24
+  s_8b2c18a773b565::t_a2a6ddd8e6393a 10
+content/lessons/b-plus-tree.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-24
+content/lessons/union-find.md
+  s_8b2c18a773b565::t_92b87a7cc7d9b8 1-20
+package-lock.json
+  s_8b2c18a773b565::t_e8588d4f6b5736 1-212
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "074aa22a0b2019e09179d438944b3e8c32036288",
+  "prompts": {},
+  "sessions": {
+    "s_8b2c18a773b565": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a207bd-4530-7533-9337-a2b2fcb21515",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    },
+    "s_8b82e73be00b0e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a207ba-d2d7-7471-a301-486e1d57af96",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

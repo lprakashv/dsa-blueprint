@@ -1,0 +1,40 @@
+site/src/analytics.js
+  s_3acf7bc76d81ac::t_bcfad1bca3098b 1-3,5-7,15
+  s_3acf7bc76d81ac::t_a81c80132c13f3 4,8-14
+site/index.html
+  s_3acf7bc76d81ac::t_bcfad1bca3098b 11
+test/analytics.test.js
+  s_3acf7bc76d81ac::t_f29d6f890101b4 1-47
+  s_3acf7bc76d81ac::t_a81c80132c13f3 48-81
+site/src/app.js
+  s_3acf7bc76d81ac::t_bcfad1bca3098b 5,468,601
+README.md
+  s_3acf7bc76d81ac::t_dcd0da244f6c10 79,81,88-90
+  s_3acf7bc76d81ac::t_bcfad1bca3098b 77-78,80,87,91
+  s_3acf7bc76d81ac::t_a4e50f1307bdf5 84
+  s_3acf7bc76d81ac::t_675cdfa78c2c4a 82-83,85-86
+.github/workflows/deploy-pages.yml
+  s_3acf7bc76d81ac::t_a4e50f1307bdf5 27
+  s_3acf7bc76d81ac::t_bcfad1bca3098b 24-26
+scripts/build.js
+  s_3acf7bc76d81ac::t_bcfad1bca3098b 1,7,11,17-19
+  s_3acf7bc76d81ac::t_2aed9a22786881 8
+  s_3acf7bc76d81ac::t_dcd0da244f6c10 4-6,12,14-16
+  s_3acf7bc76d81ac::t_a81c80132c13f3 13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "716a54084f9099a3802b3b456a1db980127db86b",
+  "prompts": {},
+  "sessions": {
+    "s_3acf7bc76d81ac": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20245-59a0-74e1-871b-e0c9b01f4f14",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

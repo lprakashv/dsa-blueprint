@@ -1,0 +1,27 @@
+README.md
+  s_9d61cc56096390::t_819f63fc48510e 16,33,63
+CONTRIBUTING.md
+  s_9d61cc56096390::t_819f63fc48510e 15,23,34
+docs/course-board-review.md
+  s_9d61cc56096390::t_819f63fc48510e 3,19
+package.json
+  s_9d61cc56096390::t_fff57f697c0b6c 19
+package-lock.json
+  s_9d61cc56096390::t_2aa89777bd7c33 11,19-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7479997678804577241ab9647dde7a1c02c04138",
+  "prompts": {},
+  "sessions": {
+    "s_9d61cc56096390": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a208fe-7567-7572-a2f2-966f84495b48",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

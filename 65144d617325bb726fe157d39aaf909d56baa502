@@ -1,0 +1,32 @@
+CONTRIBUTING.md
+  s_f828e783fa8427::t_933fab955f18a3 15,23,34
+.github/workflows/deploy-pages.yml
+  s_f828e783fa8427::t_933fab955f18a3 30-31
+docs/course-board-review.md
+  s_f828e783fa8427::t_933fab955f18a3 3,21
+README.md
+  s_f828e783fa8427::t_933fab955f18a3 33,61
+  s_f828e783fa8427::t_fb7bde6b3834c9 62
+test/build.test.js
+  s_f828e783fa8427::t_933fab955f18a3 12,16-17
+package.json
+  s_f828e783fa8427::t_e9b1f556f70b87 19
+package-lock.json
+  s_f828e783fa8427::t_c90ec370d03ce7 11,19-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "65144d617325bb726fe157d39aaf909d56baa502",
+  "prompts": {},
+  "sessions": {
+    "s_f828e783fa8427": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20951-b316-73d0-80e5-bd2a7d60f452",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

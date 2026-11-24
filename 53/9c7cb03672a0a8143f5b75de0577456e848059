@@ -1,0 +1,131 @@
+content/lessons/median-of-two-sorted-arrays.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-33
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17,36,116
+CONTRIBUTING.md
+  s_c17bd28f64a5b1::t_8ebc1bd7d37f8b 29
+content/lessons/tree-postorder.md
+  s_c17bd28f64a5b1::t_f0c625f5516b10 15-20
+content/lessons/stack.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/bellman-ford.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/spiral-matrix.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/heap.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/intervals.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+content/lessons/linked-list.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/binary-search-on-answer.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/floyd-warshall.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+content/lessons/grid-obstacle-elimination.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 45
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-35
+content/lessons/hash-map.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/matrix-prefix-sum.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+content/lessons/topological-sort.md
+  s_c17bd28f64a5b1::t_f0c625f5516b10 15-20
+content/lessons/greedy.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+content/lessons/binary-tree-maximum-path-sum.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 35
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-32
+content/lessons/b-tree.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/backtracking.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/b-plus-tree.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/bfs.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/linked-list-gap.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/prefix-sum.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/dijkstra.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/sliding-window.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+content/lessons/word-search-ii.md
+  s_c17bd28f64a5b1::t_f0c625f5516b10 15-33
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 36
+content/lessons/dfs.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/prefix-sum-hash-map.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/grid-bfs.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/reverse-nodes-in-k-group.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-33
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 36
+content/lessons/array-index-map.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+README.md
+  s_c17bd28f64a5b1::t_8ebc1bd7d37f8b 12
+content/lessons/grid-dfs.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-20
+content/lessons/binary-search.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+content/lessons/knapsack-01.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/burst-balloons.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-32
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 35
+content/lessons/largest-rectangle-in-histogram.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 41
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-32
+content/lessons/dp-min-max.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+content/lessons/union-find.md
+  s_c17bd28f64a5b1::t_f0c625f5516b10 15-20
+content/lessons/dynamic-programming.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-20
+content/lessons/minimum-window-substring.md
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 43
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-33
+content/lessons/split-array-largest-sum.md
+  s_c17bd28f64a5b1::t_6bead12da3c5f6 15-16,18-33
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17,36,116
+content/lessons/word-ladder.md
+  s_c17bd28f64a5b1::t_f0c625f5516b10 15-33
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 42
+content/lessons/two-pointers.md
+  s_c17bd28f64a5b1::t_f0c625f5516b10 15-16,18-20
+  s_c17bd28f64a5b1::t_6e8653efcb1d48 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "539c7cb03672a0a8143f5b75de0577456e848059",
+  "prompts": {},
+  "sessions": {
+    "s_c17bd28f64a5b1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20e5d-3be5-74e2-aa40-696abd98b2c8",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

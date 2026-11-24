@@ -1,0 +1,14 @@
+README.md
+  h_d86ff2787ff074 61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0ecf2eb28ae4289e91b4d4d5a8c8574d7057ee16",
+  "prompts": {},
+  "humans": {
+    "h_d86ff2787ff074": {
+      "author": "Lalit Vatsal <lvatsal@splunk.com>"
+    }
+  }
+}

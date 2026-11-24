@@ -16,6 +16,6 @@
     "coverage": "node --experimental-test-coverage --test"
   },
   "devDependencies": {
-    "@lprakashv/course-board": "https://codeload.github.com/lprakashv/course-board/tar.gz/532b40b44007fd84a694f61ecb293a5261c552fa"
+    "@lprakashv/course-board": "https://codeload.github.com/lprakashv/course-board/tar.gz/5f01a3d794ad1798f6a7162fb24f41c81041def9"
   }
 }

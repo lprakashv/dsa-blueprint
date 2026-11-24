@@ -14,7 +14,8 @@ test('production output uses the stock learner and ships the referenced data', a
     assert.match(html, /src="\.\/_board\/app\.js"/)
     assert.doesNotMatch(html, /data-course-board-adapter/)
     assert.match(html, /gtag\/js\?id=G-ABC123/)
-    assert.match(html, /addEventListener\('hashchange'/)
+    assert.match(html, /addEventListener\('course-board:navigate'/)
+    assert.match(html, /page_title: document.title/)
     const course = JSON.parse(await readFile(join(site, 'course.json'), 'utf8'))
     assert.equal(course.id, 'dsa-blueprint')
     const { steps } = course.chapters[0].lessons[0]

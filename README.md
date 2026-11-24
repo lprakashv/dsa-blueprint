@@ -30,7 +30,7 @@ npm run dev
 
 Open [the learner preview](http://127.0.0.1:4173/). Save changes to the course files and reload the page. Stop the server with Ctrl+C.
 
-Course Board is pinned to the `v0.3.0` tag commit `9e76c08`. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/9e76c08de42190571454631d64c8f90572bcc89f)
+Course Board is pinned to the `v0.3.5` tag commit `532b40b`. The Course Board learner builds and serves this site from the same files Studio edits. [Course Board source](https://github.com/lprakashv/course-board/tree/532b40b44007fd84a694f61ecb293a5261c552fa)
 
 ## Author and import
 
@@ -58,7 +58,7 @@ Open [the production preview](http://127.0.0.1:4174/). Stop the server with Ctrl
 
 The GitHub Pages workflow checks pull requests to `main` and publishes the site and screenshot on pushes to `main` or manual runs. Set **Pages → Build and deployment → Source** to **GitHub Actions**. [Deployment workflow](.github/workflows/deploy-pages.yml)
 
-The build reads the `GOOGLE_TAG_ID` GitHub Actions repository secret to enable Google Analytics. Use a GA4 measurement ID. If the secret is empty, analytics is disabled. The ID is visible in the published site. Course Board records the initial page view and fragment navigation; disable overlapping history-change measurement in Google Analytics to avoid duplicate views. [Analytics guide](https://github.com/lprakashv/course-board/blob/9e76c08de42190571454631d64c8f90572bcc89f/docs/publishing.md#add-analytics-to-the-default-site)
+The build reads the `GOOGLE_TAG_ID` GitHub Actions repository secret to enable Google Analytics. Use a GA4 measurement ID. If the secret is empty, analytics is disabled. The ID is visible in the published site. Course Board records the initial page view and fragment navigation; disable overlapping history-change measurement in Google Analytics to avoid duplicate views. [Analytics guide](https://github.com/lprakashv/course-board/blob/532b40b44007fd84a694f61ecb293a5261c552fa/docs/publishing.md#add-analytics-to-the-default-site)
 
 ## Learner migration
 

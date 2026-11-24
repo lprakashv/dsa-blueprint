@@ -12,6 +12,12 @@ diagram:
   alt: "B+ Tree: An insert fills a leaf past capacity"
 ```
 
+### Problem
+
+Maintain sorted records in a B+ tree and return the keys in an inclusive range. In this example, each leaf holds at most three records. Insert 40 into a leaf with keys [10, 20, 30], then find the keys from 20 through 35.
+
+### Walkthrough
+
 Each leaf can hold three records in this example\. Insert 40 after 30\. The diagram shows record keys only\.
 
 ## Copy up the first key in the right leaf

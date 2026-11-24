@@ -12,6 +12,12 @@ diagram:
   alt: "Heap / Top K: Add the first three values"
 ```
 
+### Problem
+
+Given an array and an integer k, return the k largest values. For [4, 1, 7, 3, 9] and k = 3, the result contains 4, 7, and 9; their order is not required.
+
+### Walkthrough
+
 Find the three largest values in \[4, 1, 7, 3, 9\]\. Add 4, 1, and 7 to the heap\. Its root is 1\.
 
 ## Compare 3 with the root

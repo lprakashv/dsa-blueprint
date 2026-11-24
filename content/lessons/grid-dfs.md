@@ -12,6 +12,12 @@ diagram:
   alt: "Grid DFS & Flood Fill: Decide which cells touch"
 ```
 
+### Problem
+
+Given a grid of land (1) and water (0), count the islands. An island is a group of land cells connected by moves up, down, left, or right; diagonal contact alone does not connect cells.
+
+### Walkthrough
+
 A 1 is land and a 0 is water\. Cells share an island when you can reach one from the other by moving along edges\.
 
 ## Visit all land reachable from (0, 0)

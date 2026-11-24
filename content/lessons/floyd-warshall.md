@@ -12,6 +12,12 @@ diagram:
   alt: "Floyd–Warshall: Fill the matrix from direct edges"
 ```
 
+### Problem
+
+Given a directed weighted graph, find the shortest distance between every pair of vertices. Use infinity when no path exists. Report a negative cycle if one exists, since it makes some shortest distances undefined. For this example, compare the direct A → C edge of cost 10 with the route through B.
+
+### Walkthrough
+
 Set each diagonal entry to 0\. Enter 3 for A → B, 2 for B → C, and 10 for A → C\. Use infinity when there is no direct edge\.
 
 ## Ask if a stop at B helps

@@ -12,9 +12,27 @@ diagram:
   alt: "Binary Tree Maximum Path Sum: Give each completed node two jobs"
 ```
 
+### Problem
+
+Find the largest sum of node values along a nonempty simple path in a binary tree. A path can start and finish at any nodes. It follows tree edges and visits each node at most once.
+
+### Example
+
+```text
+Input
+Tree in level order = [-5, 4, 8, 3, -6]
+
+Output
+10
+```
+
+The path 3 → 4 → −5 → 8 has sum 10.
+
+### Walkthrough
+
 For each node, compute a downward gain for its parent\. Also score a path whose highest node is this one\. Process the children first so their gains are available\.
 
-[Read the problem and hints](#/binary-tree-maximum-path-sum/practice).
+[Read the constraints and hints](#/binary-tree-maximum-path-sum/practice).
 
 ## Start with one-node paths
 

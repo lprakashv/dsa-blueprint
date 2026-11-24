@@ -12,9 +12,27 @@ diagram:
   alt: "Burst Balloons: Give the row two fixed boundaries"
 ```
 
+### Problem
+
+Remove all balloons from a row. When you remove one, multiply its value by the values of its two current neighbors and add the product to your score. An absent neighbor counts as 1. Find the largest possible total.
+
+### Example
+
+```text
+Input
+balloons = [2, 4, 3]
+
+Output
+33
+```
+
+Remove the 4 first, then the 2, then the 3. The scores are 24, 6, and 3.
+
+### Walkthrough
+
 Add a 1 at each end\. The two added values stay in place and contribute to a score when an edge balloon is removed\.
 
-[Read the problem and hints](#/burst-balloons/practice).
+[Read the constraints and hints](#/burst-balloons/practice).
 
 ## Split the interval at the last balloon
 

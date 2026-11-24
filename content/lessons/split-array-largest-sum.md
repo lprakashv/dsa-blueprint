@@ -12,9 +12,28 @@ diagram:
   alt: "Split Array Largest Sum: Turn the optimization into a yes or no test"
 ```
 
+### Problem
+
+Divide an array of nonnegative integers into exactly k nonempty contiguous groups, where 1 ≤ k ≤ the array length. Return the smallest possible value of the largest group sum.
+
+### Example
+
+```text
+Input
+nums = [4, 2, 6, 3, 5]
+k = 2
+
+Output
+12
+```
+
+The groups \[4, 2, 6\] and \[3, 5\] have sums 12 and 8. Every split into two groups has a group that sums to at least 12.
+
+### Walkthrough
+
 Ask if there is a split with every group sum at most cap\. Search from 6, the largest item, through 20, the total\. A larger cap accepts every split that a smaller one accepts\.
 
-[Read the problem and hints](#/split-array-largest-sum/practice).
+[Read the constraints and hints](#/split-array-largest-sum/practice).
 
 ## Take the longest prefix that fits each group
 
@@ -94,7 +113,7 @@ id: practice
 
 ### Problem
 
-Divide the array into exactly k nonempty contiguous groups. Return the smallest possible value of the largest group sum.
+Divide an array of nonnegative integers into exactly k nonempty contiguous groups, where 1 ≤ k ≤ the array length. Return the smallest possible value of the largest group sum.
 
 ### Example
 

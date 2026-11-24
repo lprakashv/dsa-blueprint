@@ -12,6 +12,12 @@ diagram:
   alt: "Merge Intervals: Sort by start time"
 ```
 
+### Problem
+
+Given intervals, combine every pair that overlaps and return the resulting non-overlapping intervals. Treat intervals that share an endpoint as overlapping. For [[1, 3], [2, 6], [8, 10], [9, 12]], return [[1, 6], [8, 12]].
+
+### Walkthrough
+
 After sorting, the next start is always at or after the last start you processed\.
 
 ## Combine the first overlap

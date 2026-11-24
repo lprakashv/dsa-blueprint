@@ -26,6 +26,7 @@ Open [Course Board Studio](http://127.0.0.1:4175/). Select a lesson and edit the
 
 - Set chapter and lesson order in `content/course.json`. Each lesson ID maps to `content/lessons/<id>.md`.
 - Use `##` for step titles and `###` or lower for headings within a step. Put a fenced `step` block immediately below the title to set a named ID, attach a diagram, or reference a snippet. Keep lesson IDs and the order of published numbered steps stable. Keep named step IDs stable when you reorder steps.
+- Begin the first step with a clear problem statement before the walkthrough. Describe the input, the required result, and any rules needed to understand the example. Keep challenge statements and examples consistent with Practice.
 - Keep the example, complexity, invariant, common error, metrics, and practice answer consistent. Include a question, a separate answer, and related exercises. For a challenge, also include a problem statement, example, constraints, hints, and a public judge link.
 - Put example files in `content/snippets/`. Set `snippet.src` relative to that directory and set `snippet.language` to `python` or `java`. Edit the file directly to update its content. Reflect new examples in `test/python.test.js` and `test/java.test.js`.
 - Put board files under `public/` and set `diagram.src` relative to it. Write descriptive alternative text. Edit a migrated HTML board as a static file or replace it with a board attachment in Studio. To draw a new board, use Studio's Excalidraw editor. The learner renders attachments with Course Board's diagram types.

@@ -12,6 +12,12 @@ diagram:
   alt: "Breadth-First Search: Start at distance zero"
 ```
 
+### Problem
+
+Given an unweighted graph, a start node, and a target, find the minimum number of edges from the start to the target. Return -1 if the target is unreachable. In this example, start at A and find the distance to F.
+
+### Walkthrough
+
 Put A in a first\-in, first\-out queue\. Mark it discovered\.
 
 ## Find the first layer

@@ -12,6 +12,12 @@ diagram:
   alt: "Depth-First Search: Start at the root"
 ```
 
+### Problem
+
+Given a graph and a start node, visit every node reachable from the start. Visit each node at most once. For this example, start at A and visit B before C.
+
+### Walkthrough
+
 Mark A visited\. Explore B before C for this example\.
 
 ## Follow the left branch

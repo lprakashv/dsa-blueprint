@@ -12,6 +12,12 @@ diagram:
   alt: "Postorder Tree Aggregation: Visit children before their parent"
 ```
 
+### Problem
+
+Given a binary tree, find its diameter: the largest number of edges on a path between any two nodes. The path does not have to pass through the root. An empty tree has diameter 0.
+
+### Walkthrough
+
 Put a return visit for A on the stack\. Process the children before that return visit\. An empty subtree has height zero\.
 
 ## Pass height 1 up from each leaf

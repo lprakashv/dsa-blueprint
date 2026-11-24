@@ -12,6 +12,12 @@ diagram:
   alt: "Union-Find: Start with four separate sets"
 ```
 
+### Problem
+
+Given nodes and a sequence of connections, maintain groups of connected nodes. Support joining two groups and checking whether two nodes belong to the same group. Start with each node in its own group.
+
+### Walkthrough
+
 Each node is its own root\. A find on any node returns that node\.
 
 ## Join two pairs by their roots

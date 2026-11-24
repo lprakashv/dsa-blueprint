@@ -12,6 +12,12 @@ diagram:
   alt: "Hash Map Lookup: Start with an empty map"
 ```
 
+### Problem
+
+Given an unsorted array and a target sum, find the indices of two distinct elements whose values add to the target. For [4, 1, 5, 8] and target 9, return indices [0, 2]. Return no pair if none exists.
+
+### Walkthrough
+
 Given target 9, scan the unsorted array once\. For each value x, look up 9 − x\.
 
 ## Record the first index

@@ -12,6 +12,12 @@ diagram:
   alt: "Bellman–Ford: Start with only the source reachable"
 ```
 
+### Problem
+
+Given a directed weighted graph and a source, find the shortest distance from the source to each reachable vertex. Edge weights may be negative. Detect a negative cycle reachable from the source, because distances affected by it have no finite minimum.
+
+### Walkthrough
+
 Set A to 0 and all other distances to infinity\. For this trace, visit edges in order C → D, B → C, A → B, A → C\.
 
 ### Example state

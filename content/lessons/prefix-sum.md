@@ -12,6 +12,12 @@ diagram:
   alt: "Prefix Sum: Start with an empty prefix"
 ```
 
+### Problem
+
+Given a fixed array of numbers, answer sum queries for contiguous ranges. Each query gives inclusive start and end indices. For [2, 4, 1, 3], the sum from index 1 through index 3 is 8.
+
+### Walkthrough
+
 The sum of zero values is 0\. Put this value at index 0\.
 
 ## Add one input value at a time

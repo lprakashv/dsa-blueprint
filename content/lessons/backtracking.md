@@ -12,6 +12,12 @@ diagram:
   alt: "Backtracking: Record the empty subset"
 ```
 
+### Problem
+
+Given a list of distinct values, return every subset, including the empty subset. For [1, 2], the subsets are [], [1], [2], and [1, 2].
+
+### Walkthrough
+
 For input \[1, 2\], start with an empty path\. Record a copy before making any choice\.
 
 ## Take the first option

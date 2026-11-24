@@ -12,6 +12,12 @@ diagram:
   alt: "Dijkstra’s Algorithm: Give only the source a finite distance"
 ```
 
+### Problem
+
+Given a directed graph with nonnegative edge weights and a source, find the shortest distance from the source to each reachable node. For this example, start at A and find the shortest path to D.
+
+### Walkthrough
+
 Start at A with distance 0\. The other nodes have no known path yet\.
 
 ### Example state

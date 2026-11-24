@@ -12,9 +12,28 @@ diagram:
   alt: "Reverse Nodes in k-Group: Confirm that two nodes are available"
 ```
 
+### Problem
+
+Reverse each complete group of k consecutive nodes in a linked list. Preserve the order of a final group with fewer than k nodes. Change the links and keep each node’s value.
+
+### Example
+
+```text
+Input
+List = [8, 3, 5, 2, 9]
+k = 2
+
+Output
+[3, 8, 2, 5, 9]
+```
+
+The pairs \[8, 3\] and \[5, 2\] each reverse. The last node stays in place.
+
+### Walkthrough
+
 Start at a dummy node\. Count two links to find the group end at 3\. Save 8 as the old first node and 5 as the node after the group\.
 
-[Read the problem and hints](#/reverse-nodes-in-k-group/practice).
+[Read the constraints and hints](#/reverse-nodes-in-k-group/practice).
 
 ## Reverse links until the saved successor
 

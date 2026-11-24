@@ -12,6 +12,12 @@ diagram:
   alt: "Multi-Source Grid BFS: Put both sources in the initial queue"
 ```
 
+### Problem
+
+Given a grid with source cells, open cells, and walls, find the fewest moves from any source to each open cell. Move one cell at a time along an edge; walls cannot be crossed. Return -1 for walls and for open cells that cannot reach a source.
+
+### Walkthrough
+
 Each move costs one\. The top\-left and bottom\-right sources both start at distance 0\. A wall cannot be crossed\.
 
 ## Reach the cells one move away

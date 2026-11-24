@@ -12,6 +12,12 @@ diagram:
   alt: "Stacks: Start with an empty stack"
 ```
 
+### Problem
+
+Given a string of opening and closing brackets, decide whether it is valid. Each closing bracket must match the most recent unmatched opening bracket, and no bracket may remain unmatched. For example, {[]} is valid.
+
+### Walkthrough
+
 Read \{ \[ \] \} from left to right\. Each closing bracket must match the top of the stack\.
 
 ## Store each opening bracket

@@ -12,9 +12,28 @@ diagram:
   alt: "Word Search II: Store shared prefixes once"
 ```
 
+### Problem
+
+Return the dictionary words that you can spell in a grid. Move one cell up, down, left, or right at a time. Use each cell at most once per word. Return each match once, in any order.
+
+### Example
+
+```text
+Input
+Board = [["a", "t", "e"], ["t", "o", "a"]]
+Words = ["at", "ate", "to", "tea", "tat", "ata"]
+
+Output
+["at", "ate", "tat", "tea", "to"]
+```
+
+The top row spells ate, and the first two cells spell at. Other routes spell tat, tea, and to. No valid path spells ata.
+
+### Walkthrough
+
 Build a trie from the words\. Store a full word at the node where it ends\. The prefix at marks a match and still has children for ate and ata\.
 
-[Read the problem and hints](#/word-search-ii/practice).
+[Read the constraints and hints](#/word-search-ii/practice).
 
 ## Record a word and continue from its prefix
 

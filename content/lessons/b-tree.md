@@ -12,6 +12,12 @@ diagram:
   alt: "B-Tree: Start with a full root page"
 ```
 
+### Problem
+
+Maintain sorted keys in a B-tree with minimum degree 2. Each page holds at most three keys. Insert 40 into a tree whose root contains [10, 20, 30], then search for 20 in the resulting tree.
+
+### Walkthrough
+
 This example uses minimum degree 2, so each page holds at most three keys\. The root is a full leaf\. Insert 40 next\.
 
 ## Promote the median key

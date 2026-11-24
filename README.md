@@ -9,6 +9,7 @@ Learn coding interview patterns with step-by-step whiteboards, Python and Java e
 ## Explore the course
 
 - Use the home page to browse 42 lessons across seven topic chapters. Use the course outline to search for a lesson or step.
+- Start each study lesson with its problem statement, then follow the walkthrough to see how the pattern solves it.
 - Open **Pattern notes** for the invariant, complexity, and common error. Open **Python example** or **Java example** for the implementation.
 - In **Practice**, review the choices and open **Check the answer** to see the explanation and related exercises. The ten **Misc Problems** lessons include problem statements, constraints, hints, and links to LeetCode.
 - Open **Reference → Pattern cheatsheets** to compare signals and costs and jump to code examples.

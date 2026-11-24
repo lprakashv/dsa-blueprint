@@ -12,6 +12,25 @@ diagram:
   alt: "Minimum Window Substring: Track missing occurrences"
 ```
 
+### Problem
+
+Find the shortest contiguous piece of source that covers every letter in target, including its repeated letters. Return an empty string if a cover does not exist. If two shortest covers tie, return the one that starts first.
+
+### Example
+
+```text
+Input
+source = "CABACBD"
+target = "AAB"
+
+Output
+"ABA"
+```
+
+ABA contains two copies of A and one B. A shorter window cannot contain all three letters.
+
+### Walkthrough
+
 The target AAB needs two copies of A and one of B\. Start with three missing occurrences\.
 
 ### Example state
@@ -21,7 +40,7 @@ The target AAB needs two copies of A and one of B\. Start with three missing occ
 | Missing | 3 |
 | Best length | — |
 
-[Read the problem and hints](#/minimum-window-substring/practice).
+[Read the constraints and hints](#/minimum-window-substring/practice).
 
 ## A set of letters is not enough
 

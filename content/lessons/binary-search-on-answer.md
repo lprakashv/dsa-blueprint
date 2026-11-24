@@ -12,6 +12,12 @@ diagram:
   alt: "Binary Search on the Answer: Choose a feasible upper bound"
 ```
 
+### Problem
+
+Given piles of items and a time limit, find the smallest integer rate that finishes all piles in time. In one hour, work on one pile and remove up to the rate; unused capacity does not carry to another pile. For [3, 5, 8] and 6 hours, find the minimum rate.
+
+### Walkthrough
+
 Finish piles \[3, 5, 8\] in 6 hours\. Each hour works on one pile\. Rate 8 needs one hour per pile, so the minimum feasible rate is between 1 and 8\.
 
 ## Test the middle rate

@@ -12,6 +12,12 @@ diagram:
   alt: "Sliding Window: Add the first window"
 ```
 
+### Problem
+
+Given an array and a valid window size k, find the largest sum of any k consecutive elements. For [2, 1, 5, 1, 3, 2] and k = 3, return 9 for the window [5, 1, 3].
+
+### Walkthrough
+
 Add the first 3 values\. This sum is the first candidate for the maximum\.
 
 ### Example state

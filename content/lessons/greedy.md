@@ -12,6 +12,12 @@ diagram:
   alt: "Greedy Choice: Order meetings by end time"
 ```
 
+### Problem
+
+Given meeting intervals, choose the largest number that do not overlap. A meeting may start when the previous meeting ends. Return the selected intervals. For [[1, 3], [2, 4], [3, 5], [5, 7]], one maximum selection is [[1, 3], [3, 5], [5, 7]].
+
+### Walkthrough
+
 Sort by when each meeting ends\. A meeting can start at the previous meeting’s end\.
 
 ## Take the earliest finish

@@ -12,6 +12,12 @@ diagram:
   alt: "0/1 Knapsack and Subset Sum: Reduce equal partition to subset sum"
 ```
 
+### Problem
+
+Given positive integers, decide whether they can be split into two groups with equal sums. Use each input value exactly once. For [2, 3, 4, 1], the answer is yes: [2, 3] and [4, 1] both sum to 5.
+
+### Walkthrough
+
 The values \[2, 3, 4, 1\] sum to 10\. Find one subset that sums to 5\. The remaining values will also sum to 5\. An odd total cannot be split equally\.
 
 ## Read from the previous item state

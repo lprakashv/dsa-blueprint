@@ -12,6 +12,12 @@ diagram:
   alt: "Minimum and Maximum DP States: Start with the first element"
 ```
 
+### Problem
+
+Given a nonempty array of integers, find the largest product of a nonempty contiguous subarray. Negative values can change the sign of a product, and zero can split a range. For [2, -3, -2, 0, 4], return 12 for [2, -3, -2].
+
+### Walkthrough
+
 The only nonempty range that ends at index 0 is \[2\]\. Both extremes and the best product start at 2\.
 
 ## Compare a new range with an extension

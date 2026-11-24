@@ -12,6 +12,12 @@ diagram:
   alt: "Dense Array + Index Map: Keep both views of the values"
 ```
 
+### Problem
+
+Design a collection of distinct values that supports insertion, removal, and selection of a random stored value. Each stored value must have the same chance of selection. The order of values may change.
+
+### Walkthrough
+
 The array has \[7, 4, 9\]\. The map associates each value with its index\.
 
 ## Find the gap with the map

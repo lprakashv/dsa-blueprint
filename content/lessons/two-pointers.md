@@ -12,6 +12,12 @@ diagram:
   alt: "Two Pointers: Start at both ends"
 ```
 
+### Problem
+
+Given an array sorted in ascending order and a target sum, find the indices of two distinct elements whose values add to the target. For [1, 2, 4, 6, 8, 12] and target 10, return indices [1, 4]. Return no pair if none exists.
+
+### Walkthrough
+
 Put Left at the first element and Right at the last\. The array is sorted, so you can rule out one end after each comparison\.
 
 ### Example state

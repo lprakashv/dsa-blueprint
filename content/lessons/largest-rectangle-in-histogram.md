@@ -12,6 +12,24 @@ diagram:
   alt: "Largest Rectangle in Histogram: Keep the first bar unresolved"
 ```
 
+### Problem
+
+The array lists the heights of adjacent bars, each one unit wide. Find the maximum area of an axis-aligned rectangle that rests on the baseline and fits under the bars it spans.
+
+### Example
+
+```text
+Input
+heights = [2, 1, 4, 5, 2]
+
+Output
+8
+```
+
+Bars at indices 2 and 3 support a rectangle of width 2 and height 4.
+
+### Walkthrough
+
 At index 0, push height 2\. You cannot tell how far its rectangle extends until you see a shorter bar\.
 
 ### Example state
@@ -20,7 +38,7 @@ At index 0, push height 2\. You cannot tell how far its rectangle extends until 
 | --- | --- |
 | Best area | 0 |
 
-[Read the problem and hints](#/largest-rectangle-in-histogram/practice).
+[Read the constraints and hints](#/largest-rectangle-in-histogram/practice).
 
 ## Close the first rectangle
 

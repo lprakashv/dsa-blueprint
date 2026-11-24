@@ -12,6 +12,12 @@ diagram:
   alt: "Fixed-Gap Linked List Pointers: Add a predecessor before the head"
 ```
 
+### Problem
+
+Given the head of a singly linked list and a valid position n from the end, remove that node and return the head. For A → B → C → D and n = 2, return A → B → D.
+
+### Walkthrough
+
 Remove the second node from the end of A → B → C → D\. Put both pointers at a dummy node that points to A\.
 
 ## Move the lead pointer two links

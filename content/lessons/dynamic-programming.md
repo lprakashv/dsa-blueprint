@@ -12,6 +12,12 @@ diagram:
   alt: "Dynamic Programming: Set the first two answers"
 ```
 
+### Problem
+
+A staircase has n steps. Each move climbs either one or two steps. Count the distinct sequences of moves that reach step n. There is one way to reach step 0: make no moves. For n = 4, return 5.
+
+### Walkthrough
+
 There is one way to stay at step 0 and one way to reach step 1\.
 
 ## Count paths into step 2

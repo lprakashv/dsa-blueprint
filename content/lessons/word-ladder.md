@@ -12,6 +12,25 @@ diagram:
   alt: "Word Ladder: Put the start in the first layer"
 ```
 
+### Problem
+
+Change start into end one letter at a time. Every word after start must appear in the dictionary, including end. Return the number of words in the shortest valid chain, with start included. Return 0 if there is no chain.
+
+### Example
+
+```text
+Input
+start = "cold", end = "warm"
+words = ["cord", "card", "word", "ward", "warm"]
+
+Output
+5
+```
+
+One shortest chain is cold → cord → word → ward → warm.
+
+### Walkthrough
+
 Start with cold at chain length 1\. The start does not need to be in the dictionary\.
 
 ### Example state
@@ -20,7 +39,7 @@ Start with cold at chain length 1\. The start does not need to be in the diction
 | --- | --- |
 | Chain length | 1 |
 
-[Read the problem and hints](#/word-ladder/practice).
+[Read the constraints and hints](#/word-ladder/practice).
 
 ## Generate the first valid edit
 

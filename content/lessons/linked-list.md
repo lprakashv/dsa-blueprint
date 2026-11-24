@@ -12,6 +12,12 @@ diagram:
   alt: "Linked List Reversal: Set the starting references"
 ```
 
+### Problem
+
+Given the head of a singly linked list, reverse its links and return the new head. For A → B → C, return C → B → A.
+
+### Walkthrough
+
 Set prev to null and cur to A\. The original list is A → B → C\.
 
 ## Save B, then reverse A’s link

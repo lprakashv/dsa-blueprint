@@ -12,6 +12,12 @@ diagram:
   alt: "Prefix Sum + Hash Map: Give 0 and 1 opposite weights"
 ```
 
+### Problem
+
+Given an array containing only 0 and 1, find the length of the longest contiguous subarray with the same number of zeros and ones. For [1, 0, 1, 1, 0, 0], return 6. Return 0 if no such range exists.
+
+### Walkthrough
+
 Count a 1 as \+1 and a 0 as −1\. A range with equal counts makes no net change\. Start at boundary 0 before the first element\.
 
 ## Save the first boundary for each balance

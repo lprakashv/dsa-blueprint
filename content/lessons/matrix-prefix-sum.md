@@ -12,6 +12,12 @@ diagram:
   alt: "2D Prefix Sum: Mark the inclusive rectangle"
 ```
 
+### Problem
+
+Given a fixed matrix of numbers, answer sum queries for rectangular regions. Each query gives inclusive row and column boundaries. For [[1, 2, 3], [4, 5, 6], [7, 8, 9]], rows 1 through 2 and columns 1 through 2 sum to 28.
+
+### Walkthrough
+
 Sum rows 1 through 2 and columns 1 through 2\. Use a prefix table so each later rectangle costs the same to query\.
 
 ## Add a zero row and column

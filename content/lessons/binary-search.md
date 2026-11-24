@@ -12,6 +12,12 @@ diagram:
   alt: "Binary Search: Start with the whole range"
 ```
 
+### Problem
+
+Given an array sorted in ascending order and a target, return the index of the target, or -1 if it is absent. For [1, 3, 5, 7, 9, 11, 13] and target 11, return index 5.
+
+### Walkthrough
+
 Search for 11 in this sorted array\. Set Low to 0 and High to 6\.
 
 ### Example state

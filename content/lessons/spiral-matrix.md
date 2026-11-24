@@ -12,6 +12,12 @@ diagram:
   alt: "Spiral Matrix: Read the top row left to right"
 ```
 
+### Problem
+
+Given a rectangular matrix, return all its values in clockwise spiral order. Start at the top-left cell and visit every cell once.
+
+### Walkthrough
+
 Start with the entire rectangle\. Read 1, 2, 3, and 4\. Move the top boundary down by one\.
 
 ## Read the right column downward

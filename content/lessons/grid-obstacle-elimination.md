@@ -12,6 +12,27 @@ diagram:
   alt: "Shortest Path With Obstacle Elimination: Start with one removal available"
 ```
 
+### Problem
+
+Walk from the top-left cell to the bottom-right cell of a binary grid. Each move goes up, down, left, or right and costs one step. Entering a cell marked 1 spends one of k removals. Return the fewest moves that reach the goal, or −1 if the budget makes it unreachable.
+
+### Example
+
+```text
+Input
+grid = [[0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 1],
+        [0, 0, 1, 1, 0]]
+k = 1
+
+Output
+8
+```
+
+Detour through row 1, return to row 0 at column 2, then save the one removal for cell (1, 4).
+
+### Walkthrough
+
 Use a state (row, column, remaining)\. The initial state is (0, 0, 1)\.
 
 ### Example state
@@ -21,7 +42,7 @@ Use a state (row, column, remaining)\. The initial state is (0, 0, 1)\.
 | Moves | 0 |
 | Removals left | 1 |
 
-[Read the problem and hints](#/grid-obstacle-elimination/practice).
+[Read the constraints and hints](#/grid-obstacle-elimination/practice).
 
 ## A short arrival can use up the budget
 

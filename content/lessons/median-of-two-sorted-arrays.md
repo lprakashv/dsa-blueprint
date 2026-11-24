@@ -12,9 +12,28 @@ diagram:
   alt: "Median of Two Sorted Arrays: Fix the size of the left half"
 ```
 
+### Problem
+
+Given two arrays sorted in nondecreasing order, return the median of their combined values in logarithmic time. At least one array must be nonempty. For an even number of values, use the average of the two middle values.
+
+### Example
+
+```text
+Input
+first = [6, 8]
+second = [1, 3, 4, 5]
+
+Output
+4.5
+```
+
+The middle values in sorted order are 4 and 5. Their average is 4.5.
+
+### Walkthrough
+
 With 6 values, put 3 on each side\. Search only the cut i in the shorter array\. Set the other cut j to 3 − i\. Because the first array is shorter, every candidate i gives an in\-range j\.
 
-[Read the problem and hints](#/median-of-two-sorted-arrays/practice).
+[Read the constraints and hints](#/median-of-two-sorted-arrays/practice).
 
 ## Compare the two cross-array boundaries
 
@@ -94,7 +113,7 @@ id: practice
 
 ### Problem
 
-Return the median of the values in two sorted arrays in logarithmic time.
+Given two arrays sorted in nondecreasing order, return the median of their combined values in logarithmic time. At least one array must be nonempty. For an even number of values, use the average of the two middle values.
 
 ### Example
 

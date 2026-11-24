@@ -12,6 +12,12 @@ diagram:
   alt: "Topological Sort: Count incoming dependencies"
 ```
 
+### Problem
+
+Given tasks and directed prerequisite links, return an order in which every prerequisite appears before the task it unlocks. If a cycle makes such an order impossible, report that no valid order exists.
+
+### Walkthrough
+
 A unlocks B and C\. Both B and C unlock D\. Only A starts with in\-degree zero\.
 
 ## Process A and unlock B and C

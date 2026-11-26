@@ -30,21 +30,18 @@ jobs:
         env:
           GOOGLE_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
         run: npm run build
-      # Capture the production output so the screenshot matches the deploy artifact.
       - name: Capture README screenshot
-        run: |
-          ./node_modules/.bin/course-board preview > /tmp/dsa-blueprint-server.log 2>&1 &
-          server_pid=$!
-          trap 'kill "$server_pid"' EXIT
-          for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4174/ > /dev/null; then break; fi
-            sleep 1
-          done
-          curl --fail --silent http://127.0.0.1:4174/ > /dev/null
-          google-chrome --headless --no-sandbox --disable-gpu --hide-scrollbars \
-            --window-size=1440,900 --virtual-time-budget=3000 \
-            --screenshot="$PWD/dist/screenshot.png" http://127.0.0.1:4174/
-          test -s dist/screenshot.png
+        id: screenshot
+        uses: lprakashv/capture-and-update-screenshot-action@7427188b6422a213e031886a059ede1b1d9f6f2f
+        with:
+          config: screenshots.json
+          source: repository
+          start-command: npm run run
+          base-url: http://127.0.0.1:4174
+      - name: Add screenshot to site
+        run: cp "$SCREENSHOT_DIRECTORY/screenshot.png" dist/screenshot.png
+        env:
+          SCREENSHOT_DIRECTORY: ${{ steps.screenshot.outputs.directory }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

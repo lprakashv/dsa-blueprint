@@ -1,0 +1,23 @@
+README.md
+  s_d1d3b85502bcdf::t_f885072c2da33b 60
+screenshots.json
+  s_d1d3b85502bcdf::t_f885072c2da33b 1-5
+.github/workflows/deploy-pages.yml
+  s_d1d3b85502bcdf::t_f885072c2da33b 34-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a6acac3eb2b4d835931dc6004da9ab79968a4e9a",
+  "prompts": {},
+  "sessions": {
+    "s_d1d3b85502bcdf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a21775-9f7a-73e1-8384-3c6444d1a18d",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}

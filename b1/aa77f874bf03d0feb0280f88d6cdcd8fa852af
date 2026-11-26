@@ -1,0 +1,19 @@
+.github/workflows/deploy-pages.yml
+  s_d1d3b85502bcdf::t_ea128bc9f93ac7 15-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b1aa77f874bf03d0feb0280f88d6cdcd8fa852af",
+  "prompts": {},
+  "sessions": {
+    "s_d1d3b85502bcdf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a21775-9f7a-73e1-8384-3c6444d1a18d",
+        "model": "gpt-6.1-terra"
+      },
+      "human_author": "Lalit Vatsal <lprakashv@gmail.com>"
+    }
+  }
+}
